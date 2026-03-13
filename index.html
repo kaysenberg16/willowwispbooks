@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Willow Wisp Books | Roaming Trailer &amp; Pop-Up Bookstore</title>
+    <meta name="description" content="Willow Wisp Books is a roaming trailer and pop-up bookstore bringing stories, charm, and quiet magic to community events." />
+    <meta property="og:title" content="Willow Wisp Books | Roaming Trailer &amp; Pop-Up Bookstore" />
+    <meta property="og:description" content="A roaming trailer and pop-up bookstore bringing stories, charm, and quiet magic to community events." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://willowwispbooks.com" />
+    <link rel="canonical" href="https://willowwispbooks.com" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body class="bg-cream text-charcoal">
+
+    <!-- ===== HEADER ===== -->
+    <header class="bg-navy text-white">
+      <div class="max-w-5xl mx-auto px-4 pt-6 pb-2 flex flex-col items-center">
+        <!-- Logo -->
+        <a href="/" aria-label="Home" class="mb-4">
+          <img src="/images/logo-banner.jpg" alt="Willow Wisp Books" class="w-52 md:w-[32vw] md:max-w-[611px] h-auto" />
+        </a>
+
+        <!-- Nav -->
+        <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.25em] font-light pb-2">
+          <a href="#home" class="hover:text-teal transition-colors">Home</a>
+          <a href="#find" class="hover:text-teal transition-colors">The Bookshop</a>
+          <a href="#book" class="hover:text-teal transition-colors">Book Me</a>
+          <a href="#about" class="hover:text-teal transition-colors">About</a>
+        </nav>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" class="md:hidden p-2 text-white mb-1" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile dropdown -->
+      <nav id="mobile-menu" class="md:hidden hidden bg-navy-light border-t border-white/10">
+        <div class="flex flex-col items-center gap-4 py-6 text-sm uppercase tracking-widest font-light">
+          <a href="#home" class="hover:text-teal transition-colors">Home</a>
+          <a href="#find" class="hover:text-teal transition-colors">The Bookshop</a>
+          <a href="#book" class="hover:text-teal transition-colors">Book Me</a>
+          <a href="#about" class="hover:text-teal transition-colors">About</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="bg-cream">
+      <div class="max-w-3xl mx-auto px-6 py-14 md:py-20 text-center">
+        <h1 class="font-display text-xl md:text-3xl lg:text-4xl font-semibold leading-relaxed mb-8 text-navy uppercase tracking-wide">
+          Willow Wisp Books is a roaming trailer &amp; popup bookstore bringing stories, charm, and quiet magic to community events.
+        </h1>
+        <a href="#events" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300">
+          Find Us at an Event
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== PHOTO COLLAGE + ABOUT OVERLAY ===== -->
+    <section id="about" class="relative">
+      <!-- Photo collage strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
+        <div class="aspect-[4/3] overflow-hidden">
+          <img src="/images/booked-boxes.jpg" alt="Bookish stickers and merchandise display" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="aspect-[4/3] overflow-hidden">
+          <img src="/images/gallery-1.jpg" alt="Willow Wisp Books trailer booth at a market" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="aspect-[4/3] overflow-hidden hidden md:block">
+          <img src="/images/gallery-2.jpg" alt="Inside the cozy trailer with fairy lights and books" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="aspect-[4/3] overflow-hidden hidden md:block">
+          <img src="/images/gallery-9.jpg" alt="Bookshelves with curated titles and ivy" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- About overlay card -->
+      <div class="relative md:absolute md:inset-0 md:flex md:items-center md:justify-center md:pointer-events-none">
+        <div class="bg-white/95 md:bg-white/90 p-8 md:p-10 max-w-lg mx-auto text-center shadow-lg md:pointer-events-auto md:rounded-lg">
+          <p class="text-sm md:text-base leading-relaxed text-charcoal">
+            Willow Wisp Books travels to markets, festivals, and gatherings with a carefully curated selection of books and bookish goods. Each stop is shaped by place, season, and community. No two pop-ups are exactly the same!
+            Our home base is Maple Valley, WA, but we definitely do some traveling!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT YOU'LL FIND ===== -->
+    <section id="find" class="bg-cream-dark/40">
+      <div class="max-w-5xl mx-auto px-6 py-14 md:py-20">
+        <h2 class="font-display text-2xl md:text-3xl text-navy text-center mb-10 uppercase tracking-wider fade-in">What You'll Find</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10">
+          <!-- Card 1: Curated Books -->
+          <div class="text-center fade-in">
+            <div class="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-lg overflow-hidden shadow-md">
+              <img src="/images/curated-shelf.jpg" alt="Curated selection of books on wooden shelves" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <h3 class="font-display text-lg text-navy mb-2 uppercase tracking-wider">Curated Books</h3>
+            <p class="text-sm text-charcoal/70 leading-relaxed">Stories for adults and children, chosen slowly and thoughtfully.</p>
+          </div>
+
+          <!-- Card 2: Blind Date with a Book -->
+          <div class="text-center fade-in">
+            <div class="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-lg overflow-hidden shadow-md">
+              <img src="/images/blind-date-wrapped.jpg" alt="Beautifully wrapped book with stickers and dried flowers" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <h3 class="font-display text-lg text-navy mb-2 uppercase tracking-wider">Blind Date with a Book</h3>
+            <p class="text-sm text-charcoal/70 leading-relaxed">Wrapped stories ready to surprise you.</p>
+          </div>
+
+          <!-- Card 3: Bookish Goods -->
+          <div class="text-center fade-in">
+            <div class="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-lg overflow-hidden shadow-md">
+              <img src="/images/bookish-goods.webp" alt="Cauldron candle and bookish gifts" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <h3 class="font-display text-lg text-navy mb-2 uppercase tracking-wider">Bookish Goods</h3>
+            <p class="text-sm text-charcoal/70 leading-relaxed">Small, cozy items for readers and gift-givers.</p>
+          </div>
+        </div>
+
+        <div class="text-center fade-in">
+          <a href="#find" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300">
+            See the Bookshop
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== UPCOMING EVENTS ===== -->
+    <section id="events" class="bg-navy text-white">
+      <div class="max-w-4xl mx-auto px-6 py-14 md:py-20">
+        <h2 class="font-display text-2xl md:text-3xl text-center mb-2 uppercase tracking-wider fade-in">Upcoming Events</h2>
+        <p class="text-center text-white/50 text-sm italic mb-10 fade-in tracking-wider">Where We're Headed Next</p>
+
+        <div class="space-y-4 fade-in max-w-2xl mx-auto">
+          <!-- Event 1 -->
+          <article class="bg-white text-charcoal rounded-md p-4 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded overflow-hidden">
+              <img src="/images/gallery-1.jpg" alt="CCB Community Shopping Event" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+              <p class="text-xs text-charcoal/50 uppercase tracking-wider">Sun, Mar 22</p>
+              <h3 class="font-display text-base text-navy font-semibold">CCB Community Shopping Event / <span class="font-normal">Maple Valley</span></h3>
+            </div>
+            <a href="#book" class="flex-shrink-0 bg-sage hover:bg-sage/80 text-white px-5 py-2 text-xs uppercase tracking-wider font-semibold transition-colors text-center">
+              RSVP
+            </a>
+          </article>
+
+          <!-- Event 2 -->
+          <article class="bg-white text-charcoal rounded-md p-4 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div class="flex-shrink-0 w-16 h-16 rounded overflow-hidden">
+              <img src="/images/gallery-6.jpg" alt="NW Metaphysical Market" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+              <p class="text-xs text-charcoal/50 uppercase tracking-wider">Sat, Apr 5</p>
+              <h3 class="font-display text-base text-navy font-semibold">NW Metaphysical Market / <span class="font-normal">Tacoma</span></h3>
+            </div>
+            <a href="#book" class="flex-shrink-0 bg-sage hover:bg-sage/80 text-white px-5 py-2 text-xs uppercase tracking-wider font-semibold transition-colors text-center">
+              RSVP
+            </a>
+          </article>
+        </div>
+
+        <div class="text-center mt-8 fade-in">
+          <a href="#events" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300">
+            Full Event Calendar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== A GLIMPSE OF THE ROAD ===== -->
+    <section id="gallery" class="bg-blush/20">
+      <div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
+        <h2 class="font-display text-2xl md:text-3xl text-navy text-center mb-3 fade-in">A Glimpse of the Road..</h2>
+        <p class="text-center text-sm mb-10 fade-in">
+          Follow my mobile bookstore journey on Instagram
+          <a href="https://www.instagram.com/willowwispbooks/" target="_blank" rel="noopener noreferrer" class="text-teal hover:text-teal-dark font-semibold transition-colors">@willowwispbooks</a>
+        </p>
+
+        <!-- JS-driven grid: populated by main.ts (Instagram API or static fallback) -->
+        <div id="insta-grid" class="grid grid-cols-3 md:grid-cols-7 gap-2 fade-in">
+          <!-- Tiles injected by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BOOK ME ===== -->
+    <section id="book" class="bg-blush/30">
+      <div class="max-w-3xl mx-auto px-6 py-14 md:py-20 text-center fade-in">
+        <h2 class="font-display text-2xl md:text-3xl text-navy mb-4 uppercase tracking-wider">Book Me!</h2>
+        <p class="text-base text-charcoal/80 mb-2">
+          Want to bring Willow Wisp Books to your event?
+        </p>
+        <p class="text-sm text-charcoal/70 mb-8 leading-relaxed">
+          We offer popup bookshop experiences for markets, festivals, schools, and private gatherings.
+        </p>
+        <a href="#contact" class="inline-block bg-navy hover:bg-navy-light text-white px-8 py-3 text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300">
+          Book the Bookshop
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="contact" class="bg-navy text-white/70">
+      <div class="max-w-6xl mx-auto px-6 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          <!-- Find Me Online -->
+          <div>
+            <h3 class="text-sm uppercase tracking-[0.2em] text-white font-semibold mb-4">Find Me Online</h3>
+            <div class="flex items-center gap-3">
+              <a href="https://www.instagram.com/willowwispbooks/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-8 h-8 bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+              <a href="https://www.facebook.com/willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://www.goodreads.com/willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="Goodreads" class="w-8 h-8 bg-amber-800 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.5 2C8.92 2 6 5.37 6 9.5c0 3.07 1.47 5.7 3.6 6.9-.1-.5-.1-1.3 0-1.9.1-.5.7-3.2.7-3.2s-.2-.3-.2-.8c0-.8.5-1.4 1-1.4.5 0 .7.4.7.8 0 .5-.3 1.2-.5 1.9-.1.5.3 1 .8 1s1.6-.5 1.6-2.3c0-1.2-.8-2-2-2-1.4 0-2.2 1-2.2 2.1 0 .4.2.9.4 1.1.1.1.1.1 0 .2l-.1.5c0 .1-.1.2-.3.1-.8-.4-1.3-1.5-1.3-2.4 0-1.8 1.3-3.5 3.8-3.5 2 0 3.5 1.4 3.5 3.3 0 2-1.2 3.6-3 3.6-.6 0-1.1-.3-1.3-.7l-.4 1.4c-.1.5-.5 1.1-.7 1.5.5.2 1.1.3 1.7.3 3.6 0 6.5-3.4 6.5-7.5C19 5.37 16.08 2 12.5 2z"/></svg>
+              </a>
+              <a href="https://www.tiktok.com/@willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-8 h-8 bg-black rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/company/willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-8 h-8 bg-blue-700 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Email Signup -->
+          <div>
+            <h3 class="text-sm uppercase tracking-[0.2em] text-white font-semibold mb-2">Email Sign-up</h3>
+            <p class="text-xs text-white/50 mb-4 leading-relaxed">Occasional notes from the road &mdash; events, bookish finds, and quiet updates.</p>
+            <form id="email-signup" class="flex gap-2">
+              <input type="email" name="email" placeholder="Your Email *" required
+                class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded text-sm text-white placeholder-white/40 focus:outline-none focus:border-teal transition" />
+              <button type="submit"
+                class="bg-teal hover:bg-teal-dark text-white px-5 py-2 text-xs uppercase tracking-wider font-semibold transition-colors">
+                Sign
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 text-center">
+          <p class="text-xs text-white/30">&copy; 2026 Willow Wisp Books. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
