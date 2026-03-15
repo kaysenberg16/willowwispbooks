@@ -5,13 +5,15 @@
   --color-navy-light: #3d4d6b;
   --color-teal: #5a9aa8;
   --color-teal-dark: #4a8494;
-  --color-cream: #f7f3ed;
-  --color-cream-dark: #ede7dd;
-  --color-blush: #d4837a;
-  --color-blush-dark: #c0706a;
-  --color-sage: #8aab7f;
-  --color-charcoal: #333333;
-  --color-warm-white: #faf8f5;
+  --color-cream: #f5f0e6;
+  --color-cream-dark: #e8dfd0;
+  --color-blush: #c9907e;
+  --color-blush-dark: #b87d6c;
+  --color-sage: #7a9e6e;
+  --color-charcoal: #3a3532;
+  --color-warm-white: #faf6ef;
+  --color-amber: #c8a96e;
+  --color-amber-light: #dbc392;
 
   --font-display: "Playfair Display", Georgia, serif;
   --font-script: "Dancing Script", cursive;
@@ -31,11 +33,49 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Soft warm vignette on the hero */
+#home {
+  background: linear-gradient(
+    180deg,
+    var(--color-cream) 0%,
+    #f2ebe0 60%,
+    var(--color-cream) 100%
+  );
+}
+
+/* Warm parchment texture on "What You'll Find" */
+#find {
+  background: linear-gradient(
+    135deg,
+    #f0e8d8 0%,
+    #f5efe3 50%,
+    #ece3d3 100%
+  );
+}
+
+/* Cozy glow behind gallery images on hover */
+.gallery-tile {
+  border-radius: 0.5rem;
+  transition: box-shadow 0.4s ease;
+}
+.gallery-tile:hover {
+  box-shadow: 0 0 20px rgba(200, 169, 110, 0.35);
+}
+
+/* Warm divider between sections */
+.cozy-divider {
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-amber) 50%, transparent 100%);
+  border: none;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
 /* Scroll-triggered fade-in */
 .fade-in {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 .fade-in.visible {
   opacity: 1;
@@ -50,12 +90,13 @@ body {
   overflow: hidden;
 }
 
-/* Modal backdrop animation */
+/* Modal */
 #gallery-modal {
   transition: opacity 0.25s ease;
 }
 #gallery-modal img {
   animation: modalFadeIn 0.3s ease;
+  border-radius: 0.75rem;
 }
 @keyframes modalFadeIn {
   from { opacity: 0; transform: scale(0.95); }
