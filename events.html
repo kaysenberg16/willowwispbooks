@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upcoming Events | Willow Wisp Books</title>
+    <meta name="description" content="Find Willow Wisp Books at upcoming markets, festivals, and community events across Western Washington." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="module" src="/src/events.ts"></script>
+  </head>
+  <body class="bg-cream text-charcoal">
+
+    <!-- ===== HEADER ===== -->
+    <header class="bg-navy text-white">
+      <div class="max-w-5xl mx-auto px-4 pt-6 pb-2 flex flex-col items-center">
+        <!-- Logo -->
+        <a href="/" aria-label="Home" class="mb-4">
+          <img src="/images/logo-banner.jpg" alt="Willow Wisp Books" class="w-52 md:w-[32vw] md:max-w-[611px] h-auto" />
+        </a>
+
+        <!-- Nav -->
+        <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-light pb-2">
+          <a href="/" class="hover:text-amber-light transition-colors">Home</a>
+          <a href="/#find" class="hover:text-amber-light transition-colors">The Bookshop</a>
+          <a href="/events.html" class="text-amber-light">Events</a>
+          <a href="/reviews.html" class="hover:text-amber-light transition-colors">Reviews</a>
+          <a href="/#book" class="hover:text-amber-light transition-colors">Book Me</a>
+          <a href="/#about" class="hover:text-amber-light transition-colors">About</a>
+        </nav>
+
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" class="md:hidden p-2 text-white mb-1" aria-label="Toggle menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile dropdown -->
+      <nav id="mobile-menu" class="md:hidden hidden bg-navy-light border-t border-white/10">
+        <div class="flex flex-col items-center gap-4 py-6 text-sm uppercase tracking-widest font-light">
+          <a href="/" class="hover:text-amber-light transition-colors">Home</a>
+          <a href="/#find" class="hover:text-amber-light transition-colors">The Bookshop</a>
+          <a href="/events.html" class="text-amber-light">Events</a>
+          <a href="/reviews.html" class="hover:text-amber-light transition-colors">Reviews</a>
+          <a href="/#book" class="hover:text-amber-light transition-colors">Book Me</a>
+          <a href="/#about" class="hover:text-amber-light transition-colors">About</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="bg-navy text-white">
+      <div class="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
+        <h1 class="font-display text-3xl md:text-4xl uppercase tracking-wide mb-3">Upcoming Events</h1>
+        <p class="text-sm text-white/60">Based in Maple Valley &middot; Roaming Western Washington</p>
+      </div>
+    </section>
+
+    <!-- ===== EVENTS LIST ===== -->
+    <section class="bg-cream">
+      <div class="max-w-3xl mx-auto px-6 py-12 md:py-16">
+
+        <!-- Event 1 -->
+        <article class="bg-warm-white rounded-2xl shadow-sm overflow-hidden mb-6">
+          <div class="flex flex-col sm:flex-row">
+            <div class="sm:w-48 flex-shrink-0">
+              <img src="/images/gallery-1.jpg" alt="Willow Wisp Books set up at a market" class="w-full h-48 sm:h-full object-cover" />
+            </div>
+            <div class="p-6 flex-1">
+              <p class="text-xs text-charcoal/50 uppercase tracking-wider mb-1">Sunday, March 22, 2026</p>
+              <h2 class="font-display text-xl text-navy font-semibold mb-2">CCB Community Shopping Event</h2>
+              <div class="flex flex-col gap-1 mb-3 text-sm text-charcoal/70">
+                <p class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-charcoal/40 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" /></svg>
+                  <span>10:00 AM &ndash; 4:00 PM</span>
+                </p>
+                <p class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-charcoal/40 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  <span>CCB Church, 26519 SE 232nd St, Maple Valley, WA 98038</span>
+                </p>
+              </div>
+              <p class="text-sm text-charcoal/60 leading-relaxed">
+                Join us for a fun day of community shopping! We'll have curated books, blind dates with a book, handbound journals, and bookish goods. Free and open to all — no tickets needed.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Event 2 -->
+        <article class="bg-warm-white rounded-2xl shadow-sm overflow-hidden mb-6">
+          <div class="flex flex-col sm:flex-row">
+            <div class="sm:w-48 flex-shrink-0">
+              <img src="/images/gallery-6.jpg" alt="Celestial tapestry and bookish display" class="w-full h-48 sm:h-full object-cover" />
+            </div>
+            <div class="p-6 flex-1">
+              <p class="text-xs text-charcoal/50 uppercase tracking-wider mb-1">Saturday, April 5, 2026</p>
+              <h2 class="font-display text-xl text-navy font-semibold mb-2">NW Metaphysical Market</h2>
+              <div class="flex flex-col gap-1 mb-3 text-sm text-charcoal/70">
+                <p class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-charcoal/40 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" /></svg>
+                  <span>11:00 AM &ndash; 5:00 PM</span>
+                </p>
+                <p class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-charcoal/40 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  <span>Tacoma Convention Center, 1500 Commerce St, Tacoma, WA 98402</span>
+                </p>
+              </div>
+              <p class="text-sm text-charcoal/60 leading-relaxed">
+                A maker's market with a mystical twist. We'll be bringing curated reads, fairy libraries, handmade charms, and our signature blind dates with a book. Come say hi!
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- No more events message -->
+        <div class="text-center mt-10 py-8 border-t border-amber/20">
+          <p class="text-sm text-charcoal/50 mb-4">More events are always in the works!</p>
+          <p class="text-xs text-charcoal/40 leading-relaxed">
+            Follow on
+            <a href="https://www.instagram.com/willowwispbooks/" target="_blank" rel="noopener noreferrer" class="text-teal hover:text-teal-dark font-semibold transition-colors">Instagram</a>
+            or
+            <a href="https://www.facebook.com/willowwispbooks" target="_blank" rel="noopener noreferrer" class="text-teal hover:text-teal-dark font-semibold transition-colors">Facebook</a>
+            to hear about new dates first.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== PAST EVENTS ===== -->
+    <section class="bg-cream-dark">
+      <div class="max-w-3xl mx-auto px-6 py-12 md:py-16">
+        <h2 class="font-display text-2xl text-navy text-center mb-3 uppercase tracking-wide">Past Events</h2>
+        <hr class="cozy-divider mb-8" />
+
+        <div class="space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 py-3 border-b border-amber/10">
+            <p class="text-xs text-charcoal/40 uppercase tracking-wider sm:w-40 flex-shrink-0">Mar 8, 2026</p>
+            <p class="text-sm text-charcoal/70"><span class="font-semibold text-navy">Maple Valley Farmers Market</span> &mdash; Maple Valley, WA</p>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 py-3 border-b border-amber/10">
+            <p class="text-xs text-charcoal/40 uppercase tracking-wider sm:w-40 flex-shrink-0">Feb 22, 2026</p>
+            <p class="text-sm text-charcoal/70"><span class="font-semibold text-navy">Puyallup Vintage &amp; Makers Fair</span> &mdash; Puyallup, WA</p>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 py-3 border-b border-amber/10">
+            <p class="text-xs text-charcoal/40 uppercase tracking-wider sm:w-40 flex-shrink-0">Feb 8, 2026</p>
+            <p class="text-sm text-charcoal/70"><span class="font-semibold text-navy">Enumclaw Winter Market</span> &mdash; Enumclaw, WA</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BOOK ME CTA ===== -->
+    <section class="bg-warm-white">
+      <div class="max-w-3xl mx-auto px-6 py-12 text-center">
+        <h2 class="font-display text-xl text-navy mb-3 uppercase tracking-wide">Want Us at Your Event?</h2>
+        <p class="text-sm text-charcoal/70 mb-6 leading-relaxed">
+          We bring the bookshop to markets, festivals, schools, and private gatherings.
+        </p>
+        <a href="mailto:kayla@willowwispbooks.com" class="inline-block bg-navy hover:bg-navy-light text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
+          Get in Touch
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-navy text-white/70">
+      <div class="max-w-6xl mx-auto px-6 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          <!-- Find Me Online -->
+          <div>
+            <h3 class="font-display text-sm uppercase tracking-wide text-white font-semibold mb-4">Find Me Online</h3>
+            <div class="flex items-center gap-3">
+              <a href="https://www.instagram.com/willowwispbooks/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-8 h-8 bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+              <a href="https://www.facebook.com/willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://www.goodreads.com/willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="Goodreads" class="w-8 h-8 bg-amber-800 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.5 2C8.92 2 6 5.37 6 9.5c0 3.07 1.47 5.7 3.6 6.9-.1-.5-.1-1.3 0-1.9.1-.5.7-3.2.7-3.2s-.2-.3-.2-.8c0-.8.5-1.4 1-1.4.5 0 .7.4.7.8 0 .5-.3 1.2-.5 1.9-.1.5.3 1 .8 1s1.6-.5 1.6-2.3c0-1.2-.8-2-2-2-1.4 0-2.2 1-2.2 2.1 0 .4.2.9.4 1.1.1.1.1.1 0 .2l-.1.5c0 .1-.1.2-.3.1-.8-.4-1.3-1.5-1.3-2.4 0-1.8 1.3-3.5 3.8-3.5 2 0 3.5 1.4 3.5 3.3 0 2-1.2 3.6-3 3.6-.6 0-1.1-.3-1.3-.7l-.4 1.4c-.1.5-.5 1.1-.7 1.5.5.2 1.1.3 1.7.3 3.6 0 6.5-3.4 6.5-7.5C19 5.37 16.08 2 12.5 2z"/></svg>
+              </a>
+              <a href="https://www.tiktok.com/@willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-8 h-8 bg-black rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/company/willowwispbooks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="w-8 h-8 bg-blue-700 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Email Signup -->
+          <div>
+            <h3 class="font-display text-sm uppercase tracking-wide text-white font-semibold mb-2">Email Sign-up</h3>
+            <p class="text-xs text-white/50 mb-4 leading-relaxed">Occasional notes from the road &mdash; events, bookish finds, and quiet updates.</p>
+            <form id="email-signup" class="flex gap-2">
+              <input type="email" name="email" placeholder="Your Email *" required
+                class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded text-sm text-white placeholder-white/40 focus:outline-none focus:border-teal transition" />
+              <button type="submit"
+                class="bg-teal hover:bg-teal-dark text-white px-5 py-2 text-xs uppercase tracking-wider font-semibold transition-colors">
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 text-center">
+          <p class="text-xs text-white/30">&copy; 2026 Willow Wisp Books. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

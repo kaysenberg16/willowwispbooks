@@ -145,13 +145,13 @@ function createTile(
 
 // --- Static fallback data ---
 const staticPosts: { src: string; caption: string }[] = [
-  { src: "/images/gallery-1.jpg", caption: "Set up and ready for a great day at the market!" },
-  { src: "/images/gallery-5.jpg", caption: "The cozy interior with all the bookish vibes" },
-  { src: "/images/gallery-2.jpg", caption: "Fairy lights, ivy, and a whole lot of stories" },
-  { src: "/images/gallery-3.jpg", caption: "Mushroom decor and whimsical touches everywhere" },
-  { src: "/images/gallery-4.jpg", caption: "Kids books corner - so many colorful reads!" },
-  { src: "/images/gallery-6.jpg", caption: "Celestial vibes with this gorgeous tapestry" },
-  { src: "/images/gallery-7.jpg", caption: "Happy visitors checking out the trailer!" },
+  { src: "/images/IMG_0645.jpeg", caption: "All set up and ready for a great day at the market!" },
+  { src: "/images/IMG_0643.jpeg", caption: "Inside the trailer — celestial tapestry, fairy lights, and books galore" },
+  { src: "/images/IMG_0424.jpeg", caption: "Handmade miniature book charms — each one unique" },
+  { src: "/images/IMG_0629.jpeg", caption: "A fairy library nestled in a twig sphere" },
+  { src: "/images/IMG_0390.jpeg", caption: "Handbound journal with marbled cover — coptic stitch binding" },
+  { src: "/images/IMG_0646.jpeg", caption: "Outdoor display with blind dates and bookish goods" },
+  { src: "/images/CCB Customers.jpg", caption: "Happy visitors browsing inside the trailer!" },
 ];
 
 // --- Load gallery ---

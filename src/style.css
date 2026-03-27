@@ -43,15 +43,6 @@ body {
   );
 }
 
-/* Warm parchment texture on "What You'll Find" */
-#find {
-  background: linear-gradient(
-    135deg,
-    #f0e8d8 0%,
-    #f5efe3 50%,
-    #ece3d3 100%
-  );
-}
 
 /* Cozy glow behind gallery images on hover */
 .gallery-tile {

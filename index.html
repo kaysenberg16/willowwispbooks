@@ -30,9 +30,11 @@
         </a>
 
         <!-- Nav -->
-        <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-[0.25em] font-light pb-2">
+        <nav class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest font-light pb-2">
           <a href="#home" class="hover:text-amber-light transition-colors">Home</a>
           <a href="#find" class="hover:text-amber-light transition-colors">The Bookshop</a>
+          <a href="/events.html" class="hover:text-amber-light transition-colors">Events</a>
+          <a href="/reviews.html" class="hover:text-amber-light transition-colors">Reviews</a>
           <a href="#book" class="hover:text-amber-light transition-colors">Book Me</a>
           <a href="#about" class="hover:text-amber-light transition-colors">About</a>
         </nav>
@@ -50,6 +52,8 @@
         <div class="flex flex-col items-center gap-4 py-6 text-sm uppercase tracking-widest font-light">
           <a href="#home" class="hover:text-amber-light transition-colors">Home</a>
           <a href="#find" class="hover:text-amber-light transition-colors">The Bookshop</a>
+          <a href="/events.html" class="hover:text-amber-light transition-colors">Events</a>
+          <a href="/reviews.html" class="hover:text-amber-light transition-colors">Reviews</a>
           <a href="#book" class="hover:text-amber-light transition-colors">Book Me</a>
           <a href="#about" class="hover:text-amber-light transition-colors">About</a>
         </div>
@@ -58,94 +62,134 @@
 
     <!-- ===== HERO ===== -->
     <section id="home" class="bg-cream">
-      <div class="max-w-3xl mx-auto px-6 py-14 md:py-20 text-center">
-        <h1 class="font-display text-xl md:text-3xl lg:text-4xl font-semibold leading-relaxed mb-8 text-navy uppercase tracking-wide">
-          Willow Wisp Books is a roaming trailer &amp; popup bookstore bringing stories, charm, and quiet magic to community events.
-        </h1>
-        <a href="#events" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
-          Find Us at an Event
-        </a>
+      <div class="max-w-5xl mx-auto px-6 py-10 md:py-16 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+        <!-- Trailer image -->
+        <div class="w-full md:w-1/2 flex-shrink-0">
+          <img src="/images/trailer-booth.png" alt="The Willow Wisp Books trailer — a converted horse trailer with wooden bookshelves, plants, and a bistro table" class="w-full h-auto rounded-2xl shadow-lg" />
+        </div>
+        <!-- Tagline + CTA -->
+        <div class="text-center md:text-left">
+          <h1 class="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug mb-3 text-navy uppercase tracking-wide">
+            A Bookstore on Wheels
+          </h1>
+          <p class="font-script text-lg md:text-xl text-navy/60 mb-4">Stories, charm &amp; quiet magic</p>
+          <p class="text-xs uppercase tracking-widest text-charcoal/50 mb-4">Based in Maple Valley &middot; Roaming Western Washington</p>
+          <p class="text-sm md:text-base text-charcoal/70 leading-relaxed mb-6">
+            A popup bookstore trailer bringing curated reads and bookish goods to markets, festivals, and community events across the region.
+          </p>
+          <a href="/events.html" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
+            Find Us at an Event
+          </a>
+        </div>
       </div>
       <hr class="cozy-divider mb-0" />
     </section>
 
-    <!-- ===== PHOTO COLLAGE + ABOUT OVERLAY ===== -->
-    <section id="about" class="relative">
-      <!-- Photo collage strip -->
+    <!-- ===== PHOTO COLLAGE ===== -->
+    <section class="bg-cream">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
         <div class="aspect-[4/3] overflow-hidden">
-          <img src="/images/booked-boxes.jpg" alt="Bookish stickers and merchandise display" class="w-full h-full object-cover" loading="lazy" />
+          <img src="/images/IMG_0645.jpeg" alt="Kayla at the Willow Wisp Books trailer with goods on display" class="w-full h-full object-cover" loading="lazy" />
         </div>
         <div class="aspect-[4/3] overflow-hidden">
-          <img src="/images/gallery-1.jpg" alt="Willow Wisp Books trailer booth at a market" class="w-full h-full object-cover" loading="lazy" />
+          <img src="/images/CCB Customers.jpg" alt="Happy customers browsing books inside the trailer" class="w-full h-full object-cover" loading="lazy" />
         </div>
         <div class="aspect-[4/3] overflow-hidden hidden md:block">
-          <img src="/images/gallery-2.jpg" alt="Inside the cozy trailer with fairy lights and books" class="w-full h-full object-cover" loading="lazy" />
+          <img src="/images/IMG_0238.jpeg" alt="Full Willow Wisp Books booth at a convention with chalkboard sign and book displays" class="w-full h-full object-cover" loading="lazy" />
         </div>
         <div class="aspect-[4/3] overflow-hidden hidden md:block">
-          <img src="/images/gallery-9.jpg" alt="Bookshelves with curated titles and ivy" class="w-full h-full object-cover" loading="lazy" />
-        </div>
-      </div>
-
-      <!-- About overlay card -->
-      <div class="relative md:absolute md:inset-0 md:flex md:items-center md:justify-center md:pointer-events-none">
-        <div class="bg-warm-white/95 md:bg-warm-white/90 p-8 md:p-10 max-w-lg mx-auto text-center shadow-lg md:pointer-events-auto rounded-2xl border border-amber-light/30">
-          <p class="text-sm md:text-base leading-relaxed text-charcoal">
-            Willow Wisp Books travels to markets, festivals, and gatherings with a carefully curated selection of books and bookish goods. Each stop is shaped by place, season, and community. No two pop-ups are exactly the same!
-            Our home base is Maple Valley, WA, but we definitely do some traveling!
-          </p>
+          <img src="/images/Benbow Setup1.jpeg" alt="Indoor bookshelf setup with fairy lights and curated titles" class="w-full h-full object-cover" loading="lazy" />
         </div>
       </div>
     </section>
 
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="bg-warm-white">
+      <div class="max-w-2xl mx-auto px-6 py-12 md:py-16 text-center fade-in">
+        <h2 class="font-display text-2xl md:text-3xl text-navy mb-2 uppercase tracking-wide">About</h2>
+        <hr class="cozy-divider mb-8" />
+        <p class="text-sm md:text-base leading-relaxed text-charcoal/80">
+          Willow Wisp Books travels to markets, festivals, and gatherings with a carefully curated selection of books and bookish goods. Each stop is shaped by place, season, and community &mdash; no two pop-ups are exactly the same!
+        </p>
+        <p class="text-sm md:text-base leading-relaxed text-charcoal/80 mt-4">
+          Our home base is Maple Valley, WA, but we definitely do some traveling!
+        </p>
+      </div>
+    </section>
+
     <!-- ===== WHAT YOU'LL FIND ===== -->
-    <section id="find" class="bg-cream-dark/40">
+    <section id="find" class="bg-cream-dark">
       <div class="max-w-5xl mx-auto px-6 py-14 md:py-20">
-        <h2 class="font-display text-2xl md:text-3xl text-navy text-center mb-3 uppercase tracking-wider fade-in">What You'll Find</h2>
+        <h2 class="font-display text-2xl md:text-3xl text-navy text-center mb-3 uppercase tracking-wide fade-in">What You'll Find</h2>
         <hr class="cozy-divider mb-10" />
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10">
-          <!-- Card 1: Curated Books -->
+        <!-- Featured: Blind Date with a Book -->
+        <div class="max-w-3xl mx-auto mb-12 fade-in">
+          <div class="bg-warm-white rounded-2xl overflow-hidden shadow-md flex flex-col md:flex-row">
+            <div class="md:w-1/2">
+              <img src="/images/blind-date-book.jpg" alt="Three beautifully hand-wrapped Blind Date with a Book packages with wax seals, pressed flowers, and vintage tags" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-6 md:p-8 flex flex-col justify-center md:w-1/2">
+              <h3 class="font-display text-xl text-navy mb-3 uppercase tracking-wide">Blind Date with a Book</h3>
+              <p class="text-sm text-charcoal/70 leading-relaxed">
+                Each one is hand-wrapped and designed by me with wax seals, pressed flowers, and vintage ephemera. Pick one based on a few hints and discover your next favorite read.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid: Books + Handmade Goods -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+          <!-- Curated Books -->
           <div class="text-center fade-in">
-            <div class="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
+            <div class="w-full aspect-square mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
               <img src="/images/curated-shelf.jpg" alt="Curated selection of books on wooden shelves" class="w-full h-full object-cover" loading="lazy" />
             </div>
-            <h3 class="font-display text-lg text-navy mb-2 uppercase tracking-wider">Curated Books</h3>
-            <p class="text-sm text-charcoal/70 leading-relaxed">Stories for adults and children, chosen slowly and thoughtfully.</p>
+            <h3 class="font-display text-base text-navy mb-1 uppercase tracking-wide">Curated Books</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">Stories for adults and children, chosen slowly and thoughtfully.</p>
           </div>
 
-          <!-- Card 2: Blind Date with a Book -->
+          <!-- Handbound Journals & Charms -->
           <div class="text-center fade-in">
-            <div class="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
-              <img src="/images/blind-date-wrapped.jpg" alt="Beautifully wrapped book with stickers and dried flowers" class="w-full h-full object-cover" loading="lazy" />
+            <div class="w-full aspect-square mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
+              <img src="/images/IMG_0424.jpeg" alt="Handmade miniature book charms with beaded chains — Tarot, Greek Mythology, and more" class="w-full h-full object-cover" loading="lazy" />
             </div>
-            <h3 class="font-display text-lg text-navy mb-2 uppercase tracking-wider">Blind Date with a Book</h3>
-            <p class="text-sm text-charcoal/70 leading-relaxed">Wrapped stories ready to surprise you.</p>
+            <h3 class="font-display text-base text-navy mb-1 uppercase tracking-wide">Journals &amp; Charms</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">Handbound notebooks and book charms, all made by me.</p>
           </div>
 
-          <!-- Card 3: Bookish Goods -->
+          <!-- Fairy Libraries & Lanterns -->
           <div class="text-center fade-in">
-            <div class="w-32 h-32 md:w-36 md:h-36 mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
-              <img src="/images/bookish-goods.webp" alt="Cauldron candle and bookish gifts" class="w-full h-full object-cover" loading="lazy" />
+            <div class="w-full aspect-square mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
+              <img src="/images/IMG_0461.jpeg" alt="Handmade fairy library in a glass jar with tiny bookshelves, mushroom, and moss" class="w-full h-full object-cover" loading="lazy" />
             </div>
-            <h3 class="font-display text-lg text-navy mb-2 uppercase tracking-wider">Bookish Goods</h3>
-            <p class="text-sm text-charcoal/70 leading-relaxed">Small, cozy items for readers and gift-givers.</p>
+            <h3 class="font-display text-base text-navy mb-1 uppercase tracking-wide">Fairy Libraries</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">Handmade fairy libraries and lanterns with a touch of magic.</p>
+          </div>
+
+          <!-- Artisan Goods -->
+          <div class="text-center fade-in">
+            <div class="w-full aspect-square mx-auto mb-4 rounded-xl overflow-hidden shadow-md ring-2 ring-amber-light/40">
+              <img src="/images/stickers.webp" alt="Colorful bookish stickers spread — I Like My Books Extra Spicy, Book Store, and more" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <h3 class="font-display text-base text-navy mb-1 uppercase tracking-wide">Artisan Goods</h3>
+            <p class="text-xs text-charcoal/70 leading-relaxed">Candles, pottery, bookmarks, stickers &amp; more from fellow small crafters.</p>
           </div>
         </div>
 
         <div class="text-center fade-in">
-          <a href="#find" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
-            See the Bookshop
+          <a href="/events.html" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
+            Come See Us
           </a>
         </div>
       </div>
     </section>
 
-    <!-- ===== UPCOMING EVENTS ===== -->
+    <!-- ===== UPCOMING EVENTS (preview) ===== -->
     <section id="events" class="bg-navy text-white">
       <div class="max-w-4xl mx-auto px-6 py-14 md:py-20">
-        <h2 class="font-display text-2xl md:text-3xl text-center mb-2 uppercase tracking-wider fade-in">Upcoming Events</h2>
-        <p class="text-center text-amber-light text-sm italic mb-10 fade-in tracking-wider">Where We're Headed Next</p>
+        <h2 class="font-display text-2xl md:text-3xl text-center mb-3 uppercase tracking-wide fade-in">Upcoming Events</h2>
+        <hr class="cozy-divider mb-10 opacity-30" />
 
         <div class="space-y-4 fade-in max-w-2xl mx-auto">
           <!-- Event 1 -->
@@ -154,12 +198,10 @@
               <img src="/images/gallery-1.jpg" alt="CCB Community Shopping Event" class="w-full h-full object-cover" />
             </div>
             <div class="flex-1">
-              <p class="text-xs text-charcoal/50 uppercase tracking-wider">Sun, Mar 22</p>
-              <h3 class="font-display text-base text-navy font-semibold">CCB Community Shopping Event / <span class="font-normal">Maple Valley</span></h3>
+              <p class="text-xs text-charcoal/50 uppercase tracking-wider">Sun, Mar 22, 2026</p>
+              <h3 class="font-display text-base text-navy font-semibold">CCB Community Shopping Event</h3>
+              <p class="text-sm text-charcoal/60">Maple Valley, WA</p>
             </div>
-            <a href="#book" class="flex-shrink-0 bg-sage hover:bg-sage/80 text-white px-5 py-2 rounded-full text-xs uppercase tracking-wider font-semibold transition-colors text-center shadow-sm">
-              RSVP
-            </a>
           </article>
 
           <!-- Event 2 -->
@@ -168,27 +210,25 @@
               <img src="/images/gallery-6.jpg" alt="NW Metaphysical Market" class="w-full h-full object-cover" />
             </div>
             <div class="flex-1">
-              <p class="text-xs text-charcoal/50 uppercase tracking-wider">Sat, Apr 5</p>
-              <h3 class="font-display text-base text-navy font-semibold">NW Metaphysical Market / <span class="font-normal">Tacoma</span></h3>
+              <p class="text-xs text-charcoal/50 uppercase tracking-wider">Sat, Apr 5, 2026</p>
+              <h3 class="font-display text-base text-navy font-semibold">NW Metaphysical Market</h3>
+              <p class="text-sm text-charcoal/60">Tacoma, WA</p>
             </div>
-            <a href="#book" class="flex-shrink-0 bg-sage hover:bg-sage/80 text-white px-5 py-2 rounded-full text-xs uppercase tracking-wider font-semibold transition-colors text-center shadow-sm">
-              RSVP
-            </a>
           </article>
         </div>
 
         <div class="text-center mt-8 fade-in">
-          <a href="#events" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
-            Full Event Calendar
+          <a href="/events.html" class="inline-block bg-sage hover:bg-sage/80 text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
+            See All Events &amp; Details
           </a>
         </div>
       </div>
     </section>
 
     <!-- ===== A GLIMPSE OF THE ROAD ===== -->
-    <section id="gallery" class="bg-blush/20">
+    <section id="gallery" class="bg-cream">
       <div class="max-w-6xl mx-auto px-6 py-14 md:py-20">
-        <h2 class="font-display text-2xl md:text-3xl text-navy text-center mb-3 fade-in italic">A Glimpse of the Road..</h2>
+        <h2 class="font-display text-2xl md:text-3xl text-navy text-center mb-3 uppercase tracking-wide fade-in">Gallery</h2>
         <p class="text-center text-sm mb-10 fade-in">
           Follow my mobile bookstore journey on Instagram
           <a href="https://www.instagram.com/willowwispbooks/" target="_blank" rel="noopener noreferrer" class="text-teal hover:text-teal-dark font-semibold transition-colors">@willowwispbooks</a>
@@ -202,17 +242,18 @@
     </section>
 
     <!-- ===== BOOK ME ===== -->
-    <section id="book" class="bg-blush/30">
+    <section id="book" class="bg-cream-dark">
       <div class="max-w-3xl mx-auto px-6 py-14 md:py-20 text-center fade-in">
-        <h2 class="font-display text-2xl md:text-3xl text-navy mb-4 uppercase tracking-wider">Book Me!</h2>
+        <h2 class="font-display text-2xl md:text-3xl text-navy mb-4 uppercase tracking-wide">Book Me!</h2>
         <p class="text-base text-charcoal/80 mb-2">
           Want to bring Willow Wisp Books to your event?
         </p>
         <p class="text-sm text-charcoal/70 mb-8 leading-relaxed">
-          We offer popup bookshop experiences for markets, festivals, schools, and private gatherings.
+          We offer popup bookshop experiences for markets, festivals, schools, and private gatherings.<br />
+          Reach out and let's find a date!
         </p>
-        <a href="#contact" class="inline-block bg-navy hover:bg-navy-light text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
-          Book the Bookshop
+        <a href="mailto:kayla@willowwispbooks.com" class="inline-block bg-navy hover:bg-navy-light text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-colors duration-300 shadow-md">
+          Get in Touch
         </a>
       </div>
     </section>
@@ -223,7 +264,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
           <!-- Find Me Online -->
           <div>
-            <h3 class="text-sm uppercase tracking-[0.2em] text-white font-semibold mb-4">Find Me Online</h3>
+            <h3 class="font-display text-sm uppercase tracking-wide text-white font-semibold mb-4">Find Me Online</h3>
             <div class="flex items-center gap-3">
               <a href="https://www.instagram.com/willowwispbooks/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-8 h-8 bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 rounded flex items-center justify-center text-white hover:opacity-80 transition-opacity">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -245,14 +286,14 @@
 
           <!-- Email Signup -->
           <div>
-            <h3 class="text-sm uppercase tracking-[0.2em] text-white font-semibold mb-2">Email Sign-up</h3>
+            <h3 class="font-display text-sm uppercase tracking-wide text-white font-semibold mb-2">Email Sign-up</h3>
             <p class="text-xs text-white/50 mb-4 leading-relaxed">Occasional notes from the road &mdash; events, bookish finds, and quiet updates.</p>
             <form id="email-signup" class="flex gap-2">
               <input type="email" name="email" placeholder="Your Email *" required
                 class="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded text-sm text-white placeholder-white/40 focus:outline-none focus:border-teal transition" />
               <button type="submit"
                 class="bg-teal hover:bg-teal-dark text-white px-5 py-2 text-xs uppercase tracking-wider font-semibold transition-colors">
-                Sign
+                Sign Up
               </button>
             </form>
           </div>
