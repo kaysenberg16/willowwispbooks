@@ -32,17 +32,3 @@ const observer = new IntersectionObserver(
 );
 fadeEls.forEach((el) => observer.observe(el));
 
-// --- Email signup handler ---
-const emailForm = document.getElementById("email-signup") as HTMLFormElement | null;
-emailForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const btn = emailForm.querySelector("button") as HTMLButtonElement;
-  const original = btn.textContent;
-  btn.textContent = "Signed up!";
-  btn.disabled = true;
-  setTimeout(() => {
-    btn.textContent = original;
-    btn.disabled = false;
-    emailForm.reset();
-  }, 3000);
-});
