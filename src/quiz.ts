@@ -1,6 +1,6 @@
 import "./style.css";
 import { classify, ARCHETYPES, type QuizAnswers, type Genre, type ArchetypeKey } from "./quiz-logic.ts";
-import { bestMatch, type Book } from "./books-logic.ts";
+import { bestMatch, surprisePick, type Book } from "./books-logic.ts";
 import { books, alsoEnjoy } from "./books-data.ts";
 
 // Where matchmaking + gift requests are delivered. Reuses the existing Formspree
@@ -30,7 +30,6 @@ type MultiQ = { type: "multi"; key: string; q: string; hint?: string; opts: stri
 type Question = ChoiceQ | TextQ | MultiQ;
 
 const NOPE_ANYTHING = "Nothing — I'll try anything";
-const TOTAL = 5; // genre + decisive + flavor + recent + hard-no's
 
 // Q1 — everyone
 const genreQ: ChoiceQ = {
@@ -40,6 +39,7 @@ const genreQ: ChoiceQ = {
     { e: "💞", t: "Romance", val: "romance" },
     { e: "🐉", t: "Fantasy & Sci-Fi", val: "fantasy" },
     { e: "📓", t: "Nonfiction", val: "nonfiction" },
+    { e: "🎲", t: "I'll read anything", val: "anything" },
   ],
 };
 
@@ -127,9 +127,10 @@ const multiSets: Record<string, Set<string>> = { topics: new Set(), nope: new Se
 let recentAns = "";
 
 function flow(): Question[] {
-  const g = choiceAns.genre as Genre | undefined;
+  const g = choiceAns.genre;
   if (!g) return [genreQ];
-  return [genreQ, ...BRANCH[g], recentQ, nopeQ];
+  if (g === "anything") return [genreQ, recentQ, nopeQ];
+  return [genreQ, ...BRANCH[g as Genre], recentQ, nopeQ];
 }
 
 const bar = document.getElementById("bar");
@@ -180,8 +181,9 @@ function render(): void {
   const Q = flow()[step];
   if (!Q || !bar || !qcount || !qtext || !qhint || !opts || !backBtn || !contBtn) return;
 
-  bar.style.width = `${(step / TOTAL) * 100}%`;
-  qcount.textContent = `Question ${step + 1} of ${TOTAL}`;
+  const total = choiceAns.genre === "anything" ? 3 : 5;
+  bar.style.width = `${(step / total) * 100}%`;
+  qcount.textContent = `Question ${step + 1} of ${total}`;
   qtext.textContent = Q.q;
   if (Q.hint) {
     qhint.textContent = Q.hint;
@@ -279,18 +281,9 @@ function collect(): QuizAnswers {
   return { genre, shelf, flavor, recent: recentAns, nope: [...multiSets.nope] };
 }
 
-function showResult(): void {
-  const body = document.getElementById("quiz-body");
-  if (!body || !bar) return;
-  bar.style.width = "100%";
-
-  const a = collect();
-  const r = ARCHETYPES[classify(a)];
-  const nopes = a.nope.filter((n) => n !== NOPE_ANYTHING);
-  const flavor = a.flavor.filter(Boolean);
-
-  const recentLine = a.recent
-    ? `<p class="text-sm text-charcoal/65">Because you loved <strong>${esc(a.recent)}</strong>, I've got ideas already. 😊</p>`
+function descLines(recent: string, nopes: string[]): string {
+  const recentLine = recent
+    ? `<p class="text-sm text-charcoal/65">Because you loved <strong>${esc(recent)}</strong>, I've got ideas already. 😊</p>`
     : "";
   const nopeItems = nopes
     .map((n) => `<span class="font-semibold text-blush-dark">${esc(n.toLowerCase())}</span>`)
@@ -298,44 +291,52 @@ function showResult(): void {
   const nopeLine = nopes.length
     ? `<p class="text-sm text-charcoal/65">I'll steer clear of ${nopeItems}.</p>`
     : "";
+  return recentLine + nopeLine;
+}
 
-  const matchedShelf = classify(a);
-  const match = bestMatch(books, a);
-  const reveal = match ? matchCard(match) : genreCard(r.genreLabel);
-  const ctaLabel = match ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real";
-
-  const extras = alsoEnjoy[matchedShelf] ?? [];
-  const alsoHtml = extras.length
+function alsoEnjoyHTML(shelf: ArchetypeKey): string {
+  const extras = alsoEnjoy[shelf] ?? [];
+  return extras.length
     ? `<div class="max-w-md mx-auto mb-5"><p class="text-xs uppercase tracking-[0.16em] text-amber font-bold mb-1">You might also enjoy</p><p class="text-sm text-charcoal/70">${extras.map(esc).join(" &middot; ")}</p></div>`
     : "";
+}
 
-  const vibeBits = [`${r.shelf} reader`];
-  if (match) vibeBits.push(`matched to: ${match.title}`);
-  if (flavor.length) vibeBits.push(`likes: ${flavor.join(", ").toLowerCase()}`);
-  if (nopes.length) vibeBits.push(`no: ${nopes.join(", ").toLowerCase()}`);
-  const vibeValue = esc(vibeBits.join(" · "));
+type ResultView = {
+  name: string;
+  sub: string;
+  shelfLabel: string;
+  blurb: string;
+  desc: string;
+  reveal: string;
+  alsoHtml: string;
+  ctaLabel: string;
+  quizResult: string;
+  vibeValue: string;
+  loved: string;
+};
 
-  body.innerHTML = `
+function resultShell(v: ResultView): string {
+  return `
     <div class="text-center">
       <span class="inline-block bg-navy text-amber-light text-xs uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">Your reader type</span>
-      <h2 class="font-display text-3xl text-navy mt-3 mb-0.5">${r.name}</h2>
-      <p class="text-xs text-blush-dark italic mb-1">a Willow Wisp reader type</p>
-      <p class="text-xs uppercase tracking-[0.12em] text-teal-dark font-bold">Your shelf → ${esc(r.shelf)}</p>
+      <h2 class="font-display text-3xl text-navy mt-3 mb-0.5">${esc(v.name)}</h2>
+      <p class="text-xs text-blush-dark italic mb-1">${esc(v.sub)}</p>
+      <p class="text-xs uppercase tracking-[0.12em] text-teal-dark font-bold">Your shelf → ${esc(v.shelfLabel)}</p>
       <div class="max-w-md mx-auto mt-4 text-left space-y-2">
-        <p class="text-sm text-charcoal/75">${r.blurb}</p>
-        ${recentLine}${nopeLine}
+        <p class="text-sm text-charcoal/75">${v.blurb}</p>
+        ${v.desc}
       </div>
 
-      ${reveal}
-      ${alsoHtml}
+      ${v.reveal}
+      ${v.alsoHtml}
 
-      <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">${ctaLabel}</button>
+      <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">${v.ctaLabel}</button>
       <div class="mt-3"><button type="button" id="retake" class="text-teal-dark text-sm hover:underline">↺ retake the quiz</button></div>
 
       <form action="${FORMSPREE_ENDPOINT}" method="POST" id="match-form" class="hidden text-left bg-cream border border-dashed border-teal/50 rounded-2xl p-6 mt-6 space-y-4">
         <input type="hidden" name="_subject" value="💌 Reader match request — Willow Wisp Books" />
         <input type="hidden" name="request_type" value="matchmaking" />
-        <input type="hidden" name="quiz_result" value="${esc(`${r.name} · ${r.shelf}`)}" />
+        <input type="hidden" name="quiz_result" value="${esc(v.quizResult)}" />
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
         <h3 class="font-display text-xl text-navy text-center">Let Kayla match you</h3>
         <p class="text-sm text-charcoal/65 text-center">Tell me your vibe and I'll personally wrap you a Blind Date. Lands right in my inbox.</p>
@@ -349,24 +350,81 @@ function showResult(): void {
         </div>
         <div>
           <label for="m-loved" class="block text-xs uppercase tracking-wider text-navy font-bold mb-1">A book you loved lately</label>
-          <input type="text" id="m-loved" name="loved_lately" value="${esc(a.recent)}" placeholder="Title — or 'anything cozy'" class="w-full px-4 py-3 bg-warm-white border border-amber-light/40 rounded-lg text-sm placeholder-charcoal/30 focus:outline-none focus:border-teal transition" />
+          <input type="text" id="m-loved" name="loved_lately" value="${esc(v.loved)}" placeholder="Title — or 'anything cozy'" class="w-full px-4 py-3 bg-warm-white border border-amber-light/40 rounded-lg text-sm placeholder-charcoal/30 focus:outline-none focus:border-teal transition" />
         </div>
         <div>
           <label for="m-vibe" class="block text-xs uppercase tracking-wider text-navy font-bold mb-1">Your reading vibe &amp; hard-no's</label>
-          <textarea id="m-vibe" name="reading_vibe" rows="3" class="w-full px-4 py-3 bg-warm-white border border-amber-light/40 rounded-lg text-sm focus:outline-none focus:border-teal transition resize-y">${vibeValue}</textarea>
+          <textarea id="m-vibe" name="reading_vibe" rows="3" class="w-full px-4 py-3 bg-warm-white border border-amber-light/40 rounded-lg text-sm focus:outline-none focus:border-teal transition resize-y">${v.vibeValue}</textarea>
         </div>
         <div class="text-center pt-1">
           <button type="submit" class="inline-block bg-navy hover:bg-navy-light text-white px-8 py-3 rounded-full text-xs uppercase tracking-[0.15em] font-bold transition-colors shadow-md">Send to Kayla</button>
         </div>
       </form>
     </div>`;
+}
 
+function mountResult(body: HTMLElement, html: string): void {
+  body.innerHTML = html;
   document.getElementById("open-match")?.addEventListener("click", () => {
     const f = document.getElementById("match-form");
     f?.classList.remove("hidden");
     f?.scrollIntoView({ behavior: "smooth" });
   });
   document.getElementById("retake")?.addEventListener("click", () => location.reload());
+}
+
+function showResult(): void {
+  const body = document.getElementById("quiz-body");
+  if (!body || !bar) return;
+  bar.style.width = "100%";
+
+  const nopes = [...multiSets.nope].filter((n) => n !== NOPE_ANYTHING);
+
+  // "I'll read anything" → a surprise pick, no genre-specific questions.
+  if (choiceAns.genre === "anything") {
+    const pick = surprisePick(books, [...multiSets.nope]);
+    const vibeBits = ["open to anything"];
+    if (pick) vibeBits.push(`matched to: ${pick.title}`);
+    if (nopes.length) vibeBits.push(`no: ${nopes.join(", ").toLowerCase()}`);
+    mountResult(body, resultShell({
+      name: "The Open Book",
+      sub: "the trailer's favorite kind of reader",
+      shelfLabel: "Reader's choice",
+      blurb: "You'll read anything — which makes you exactly who Blind Dates were made for. Here's one I think you'll love.",
+      desc: descLines(recentAns, nopes),
+      reveal: pick ? matchCard(pick) : genreCard("Surprise Me"),
+      alsoHtml: pick ? alsoEnjoyHTML(pick.shelf) : "",
+      ctaLabel: pick ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real",
+      quizResult: pick ? `The Open Book · ${pick.title}` : "The Open Book",
+      vibeValue: esc(vibeBits.join(" · ")),
+      loved: recentAns,
+    }));
+    return;
+  }
+
+  const a = collect();
+  const r = ARCHETYPES[classify(a)];
+  const flavor = a.flavor.filter(Boolean);
+  const match = bestMatch(books, a);
+
+  const vibeBits = [`${r.shelf} reader`];
+  if (match) vibeBits.push(`matched to: ${match.title}`);
+  if (flavor.length) vibeBits.push(`likes: ${flavor.join(", ").toLowerCase()}`);
+  if (nopes.length) vibeBits.push(`no: ${nopes.join(", ").toLowerCase()}`);
+
+  mountResult(body, resultShell({
+    name: r.name,
+    sub: "a Willow Wisp reader type",
+    shelfLabel: r.shelf,
+    blurb: r.blurb,
+    desc: descLines(a.recent, nopes),
+    reveal: match ? matchCard(match) : genreCard(r.genreLabel),
+    alsoHtml: alsoEnjoyHTML(classify(a)),
+    ctaLabel: match ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real",
+    quizResult: `${r.name} · ${r.shelf}`,
+    vibeValue: esc(vibeBits.join(" · ")),
+    loved: a.recent,
+  }));
 }
 
 render();

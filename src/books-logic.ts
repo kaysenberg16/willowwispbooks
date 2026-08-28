@@ -11,6 +11,7 @@ export type Book = {
   tags: string[];      // lowercase descriptive tags used for matching
   cover?: string;      // optional path under /images
   blurb?: string;      // optional one-liner
+  wildcard?: boolean;  // Kayla's "if you'll read anything, read THIS" pick
 };
 
 const GENRE_TAG: Record<Genre, string> = {
@@ -97,4 +98,13 @@ export function bestMatch(books: Book[], a: QuizAnswers): Book | null {
     }
   }
   return best;
+}
+
+// For "I'll read anything": prefer the flagged wildcard, else the first book that
+// isn't excluded by a hard-no. Returns null only if every book is excluded.
+export function surprisePick(books: Book[], nope: string[]): Book | null {
+  const bad = dealbreakerTags(nope);
+  const ok = books.filter((b) => !bad.some((d) => b.tags.includes(d)));
+  if (ok.length === 0) return null;
+  return ok.find((b) => b.wildcard) ?? ok[0];
 }

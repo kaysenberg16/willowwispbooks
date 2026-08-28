@@ -40,7 +40,7 @@ export const books: Book[] = [
 
   // Fantasy / Sci-Fi — Existential
   { title: "Circe", author: "Madeline Miller", shelf: "fantasy_existential", tags: ["fantasy", "existential", "literary", "angst"] },
-  { title: "Project Hail Mary", author: "Andy Weir", shelf: "fantasy_existential", tags: ["scifi", "existential", "adventure", "hopeful"] },
+  { title: "Project Hail Mary", author: "Andy Weir", shelf: "fantasy_existential", tags: ["scifi", "existential", "adventure", "hopeful"], wildcard: true },
 
   // Nonfiction — Fun
   { title: "Born a Crime", author: "Trevor Noah", shelf: "nonfiction_fun", tags: ["nonfiction", "memoir", "fun", "humor"] },

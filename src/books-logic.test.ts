@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { wantedTags, dealbreakerTags, bestMatch, type Book } from "./books-logic.ts";
+import { wantedTags, dealbreakerTags, bestMatch, surprisePick, type Book } from "./books-logic.ts";
 import { type QuizAnswers, type ArchetypeKey } from "./quiz-logic.ts";
 import { books, alsoEnjoy } from "./books-data.ts";
 
@@ -57,6 +57,27 @@ describe("bestMatch", () => {
     // a nonfiction-fun reader with no overlap
     const m = bestMatch(onlyMystery, ans({ genre: "nonfiction", shelf: "nonfiction_fun" }));
     expect(m).toBeNull();
+  });
+});
+
+describe("surprisePick (I'll read anything)", () => {
+  const cat: Book[] = [
+    { title: "Plain", author: "a", shelf: "mystery_cozy", tags: ["mystery", "cozy"] },
+    { title: "Wild", author: "b", shelf: "fantasy_adventure", tags: ["fantasy"], wildcard: true },
+  ];
+  it("prefers the wildcard-flagged book", () => {
+    expect(surprisePick(cat, [])?.title).toBe("Wild");
+  });
+  it("skips books excluded by a hard-no, falling back to the first that's allowed", () => {
+    const cat2: Book[] = [
+      { title: "Spicy", author: "c", shelf: "romance_spicy", tags: ["romance", "spicy"], wildcard: true },
+      { title: "Clean", author: "d", shelf: "romance_clean", tags: ["romance", "clean"] },
+    ];
+    expect(surprisePick(cat2, ["Too much spice"])?.title).toBe("Clean");
+  });
+  it("returns null when every book is excluded", () => {
+    const cat3: Book[] = [{ title: "S", author: "x", shelf: "romance_spicy", tags: ["spicy"] }];
+    expect(surprisePick(cat3, ["Too much spice"])).toBeNull();
   });
 });
 
