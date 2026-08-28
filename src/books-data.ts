@@ -31,9 +31,9 @@ export const books: Book[] = [
   // Nonfiction — Thoughtful
   { title: "White Trash: The 400-Year Untold History of Class in America", author: "Nancy Isenberg", shelf: "nonfiction_sad", tags: ["nonfiction", "thoughtful", "history"] },
 
-  // ⭐ Wildcard — the "I'll read anything" surprise.
-  // TODO: confirm shelf/genre for The Decomposition Book (parked on Mystery/Thriller).
-  { title: "The Decomposition Book", author: "Sara van Os", shelf: "mystery_thriller", tags: [], wildcard: true, blurb: "The wildcard — for when you'll read anything." },
+  // ⭐ Wildcard — the "I'll read anything" surprise. Gothic/horror adult fiction;
+  // homed on Mystery/Thriller (the shelf only affects the "also enjoy" line under it).
+  { title: "The Decomposition Book", author: "Sara van Os", shelf: "mystery_thriller", tags: ["gothic", "horror", "dark"], wildcard: true, blurb: "A gothic/horror wildcard — for when you'll read anything." },
 ];
 
 // Shelf-specific bonus suggestion shown under the matched book. E.g. spicy readers
