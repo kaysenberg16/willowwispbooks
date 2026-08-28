@@ -50,7 +50,7 @@ export const alsoEnjoy: Record<ArchetypeKey, string[]> = {
   romance_clean: ["Gracie Ruth Mitchell", "Mhairi McFarlane", "Sophie Kinsella"],
   romance_spicy: ["Olivia Dade", "Joanna Lowell", "Elsie Silver"],
   fantasy_adventure: ["Andy Weir", "John Scalzi", "Iain M. Banks"],
-  fantasy_existential: ["Andy Weir", "Ursula K. Le Guin"],
+  fantasy_existential: ["Ursula K. Le Guin", "Octavia Butler", "Kazuo Ishiguro"],
   nonfiction_fun: ["Carlyle Christoff", "Elisabeth Saake", "Caroline Moore", "Summer Jewel Keown"],
   nonfiction_sad: ["Jane McGonigal", "Gretchen Rubin", "Michael Pollan"],
 };
