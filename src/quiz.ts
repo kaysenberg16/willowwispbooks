@@ -198,10 +198,13 @@ function showResult(): void {
   const nopes = ans.nope.filter((n) => n !== NOPE_ANYTHING);
 
   const recentLine = ans.recent
-    ? `<p class="text-sm text-charcoal/60 mt-2">Because you loved <strong>${esc(ans.recent)}</strong>, I've got ideas already. 😊</p>`
+    ? `<p class="text-sm text-charcoal/65">Because you loved <strong>${esc(ans.recent)}</strong>, I've got ideas already. 😊</p>`
     : "";
+  const nopeItems = nopes
+    .map((n) => `<span class="font-semibold text-blush-dark">${esc(n.toLowerCase())}</span>`)
+    .join(", ");
   const nopeLine = nopes.length
-    ? `<p class="text-sm text-blush-dark mt-1">I'll steer clear of: ${esc(nopes.join(", "))}.</p>`
+    ? `<p class="text-sm text-charcoal/65">I'll steer clear of ${nopeItems}.</p>`
     : "";
 
   const vibeValue = esc([`${r.shelf} reader`, ...(nopes.length ? [`no: ${nopes.join(", ")}`] : [])].join(" · "));
@@ -212,8 +215,10 @@ function showResult(): void {
       <h2 class="font-display text-3xl text-navy mt-3 mb-0.5">${r.name}</h2>
       <p class="text-xs text-blush-dark italic mb-1">a Willow Wisp reader type</p>
       <p class="text-xs uppercase tracking-[0.12em] text-teal-dark font-bold">Your shelf → ${esc(r.shelf)}</p>
-      <p class="text-sm text-charcoal/75 max-w-md mx-auto mt-3">${r.blurb}</p>
-      ${recentLine}${nopeLine}
+      <div class="max-w-md mx-auto mt-4 text-left space-y-2">
+        <p class="text-sm text-charcoal/75">${r.blurb}</p>
+        ${recentLine}${nopeLine}
+      </div>
 
       <div class="blind-wrap max-w-xs mx-auto my-6 shadow-lg" style="background-image:url('/images/blind dates.jpg')">
         <div class="font-script text-xl">✦ your blind date ✦</div>
