@@ -35,6 +35,7 @@ Multi-page static site with no framework. Vite is configured for multi-page buil
 - **`events.html`** — Full events page with detailed cards (date, time, address, description), past events list, and booking CTA.
 - **`reviews.html`** — Book reviews page with "Currently Reading", individual review cards, and "Kayla's Picks" grid. This page is a mockup with placeholder content.
 - **`quiz.html`** — "Find Your Next Read" page: a Blind Date explainer, the interactive book-match quiz (Kayla's real flow → one of 8 archetype shelves), a pre-filled matchmaking request form, and a Gifts section (gift-matching + gift-wrap). Forms POST to Formspree.
+- **`bookclub.html`** — The Unhinged Book Club: online-only monthly read with the current pick and an on-page discussion (Cusdis). Content from `src/club-data.ts`, rendered by `src/bookclub.ts`.
 
 ### Scripts
 
@@ -66,4 +67,5 @@ Multi-page static site with no framework. Vite is configured for multi-page buil
 - **Events are data-driven** — edit `src/events-data.ts`. Each event has a `dates` array of ISO `"YYYY-MM-DD"` strings; `src/events.ts` renders them and `src/events-logic.ts` auto-splits future dates into "Upcoming" and past dates into "Past Events" against today's date (no manual moving). For a past date with photos/credit, use the object form `{ date, photos, credit }`. Events intentionally have no RSVP/ticketing since her events are free and open.
 - **Contact**: `mailto:kayla@willowwispbooks.com` on the "Get in Touch" button in the Book Me section.
 - **Forms (Formspree)**: `submissions.html` (indie author), plus the quiz **matchmaking** form (`src/quiz.ts`) and the **gift** form (`quiz.html`) all POST to Formspree form `maqaykbr`, distinguished by a hidden `request_type` field (`matchmaking` / `gift`) and `_subject`. All include a `_gotcha` honeypot. To give matchmaking/gift their own inboxes, create dedicated Formspree forms and replace the endpoint in two places: `FORMSPREE_ENDPOINT` in `src/quiz.ts` (matchmaking) and the gift `<form action>` in `quiz.html`.
-- **Comment moderation / discussion**: not yet built (Phase 3 — Cusdis).
+- **Book Club discussion (Cusdis)**: the Unhinged Book Club (`bookclub.html`) embeds Cusdis — a low-friction, ad-free comment widget where readers post with just a name and Kayla approves each comment. Paste the free Cusdis App ID into `CUSDIS_APP_ID` in `src/club-data.ts` to switch it on (until then a friendly "opening soon" placeholder shows). Each monthly pick uses `currentPick.threadId` as its discussion thread. Set up: create a site at cusdis.com → copy the App ID → approve comments from the Cusdis dashboard (email notifications available).
+- **Monthly club pick**: edit `currentPick` in `src/club-data.ts` each month (title, author, monthLabel, blurb, optional cover, and a new `threadId` for a fresh discussion thread).

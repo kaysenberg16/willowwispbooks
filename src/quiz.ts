@@ -335,6 +335,7 @@ function resultShell(v: ResultView): string {
       </div>
 
       ${v.reveal}
+      <p class="text-xs text-charcoal/50 italic -mt-2 mb-4 max-w-xs mx-auto">Don't love this month's pick? The shelves refresh monthly — check back next month! 📅</p>
       ${v.alsoHtml}
       ${v.bonus}
 

@@ -11,6 +11,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         events: resolve(__dirname, "events.html"),
         quiz: resolve(__dirname, "quiz.html"),
+        bookclub: resolve(__dirname, "bookclub.html"),
         reviews: resolve(__dirname, "reviews.html"),
         submissions: resolve(__dirname, "submissions.html"),
       },
