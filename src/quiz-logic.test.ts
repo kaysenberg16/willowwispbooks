@@ -26,8 +26,15 @@ describe("classify", () => {
   it("'Heavy or sad endings' bumps sad → fun", () => {
     expect(classify(ans({ shelf: "nonfiction_sad", nope: ["Heavy or sad endings"] }))).toBe("nonfiction_fun");
   });
-  it("does not bump spicy romance (not a heavy/sad shelf)", () => {
+  it("does not bump spicy romance for a heavy/sad hard-no", () => {
     expect(classify(ans({ shelf: "romance_spicy", nope: ["Heavy or sad endings"] }))).toBe("romance_spicy");
+  });
+  it("'Too much spice' flips spicy romance → clean (resolves the contradiction)", () => {
+    expect(classify(ans({ shelf: "romance_spicy", nope: ["Too much spice"] }))).toBe("romance_clean");
+  });
+  it("'Too much spice' leaves non-spicy shelves alone", () => {
+    expect(classify(ans({ shelf: "romance_clean", nope: ["Too much spice"] }))).toBe("romance_clean");
+    expect(classify(ans({ shelf: "mystery_thriller", nope: ["Too much spice"] }))).toBe("mystery_thriller");
   });
   it("leaves already-light shelves untouched under the override", () => {
     expect(classify(ans({ shelf: "mystery_cozy", nope: ["Heavy or sad endings"] }))).toBe("mystery_cozy");

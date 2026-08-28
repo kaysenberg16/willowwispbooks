@@ -84,10 +84,14 @@ const LIGHTER: Partial<Record<ArchetypeKey, ArchetypeKey>> = {
 };
 
 export const NO_HEAVY = "Heavy or sad endings";
+export const NO_SPICE = "Too much spice";
 
+// Hard-no's only change the reader type when they directly contradict the chosen
+// shelf: "no heavy/sad" steers a heavy shelf lighter; "no spice" on a spicy pick
+// flips to clean. All other hard-no's are captured as preferences, not type-changers.
 export function classify(a: QuizAnswers): ArchetypeKey {
-  if (a.nope.includes(NO_HEAVY)) {
-    return LIGHTER[a.shelf] ?? a.shelf;
-  }
-  return a.shelf;
+  let shelf = a.shelf;
+  if (a.nope.includes(NO_HEAVY)) shelf = LIGHTER[shelf] ?? shelf;
+  if (a.nope.includes(NO_SPICE) && shelf === "romance_spicy") shelf = "romance_clean";
+  return shelf;
 }
