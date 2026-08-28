@@ -10,13 +10,13 @@ export type ClubPick = {
   threadId: string;   // unique discussion id for this pick (e.g. "unhinged-2026-08")
 };
 
-// ⚠️ EXAMPLE current pick — Kayla replaces this each month.
+// Kayla sets a new pick each month.
 export const currentPick: ClubPick = {
-  title: "The Decomposition Book",
-  author: "Sara van Os",
+  title: "Murder Your Employer: The McMasters Guide to Homicide",
+  author: "Rupert Holmes",
   monthLabel: "This Month",
-  blurb: "Gothic, feral, and gloriously unhinged — exactly our vibe. Read it this month and bring your most deranged theories to the discussion below. No spoilers past the current chapter, you animals. 🕯️",
-  threadId: "unhinged-decomposition-book",
+  blurb: "A genteel how-to for offing your worst boss, delivered with martini-dry wit and a body count. Deliciously, deliriously unhinged. Read along and bring your most (hypothetical!) devious theories to the discussion — no spoilers past where the group's at, you fiends. 🔪",
+  threadId: "unhinged-murder-your-employer",
 };
 
 // Optional archive of past reads (shown as a small list if non-empty).
