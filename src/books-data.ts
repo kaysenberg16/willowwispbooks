@@ -22,8 +22,8 @@ export const books: Book[] = [
   // Fantasy / Sci-Fi — Adventure
   { title: "Tress of the Emerald Sea", author: "Brandon Sanderson", shelf: "fantasy_adventure", tags: ["fantasy", "adventure"] },
 
-  // Fantasy / Sci-Fi — Existential  (EXAMPLE — awaiting Kayla's pick)
-  { title: "Project Hail Mary", author: "Andy Weir", shelf: "fantasy_existential", tags: ["scifi", "existential", "adventure", "hopeful"] },
+  // Fantasy / Sci-Fi — Existential
+  { title: "The Three-Body Problem", author: "Cixin Liu", shelf: "fantasy_existential", tags: ["scifi", "existential"] },
 
   // Nonfiction — Fun
   { title: "Feral Self-Care", author: "Mandi Em", shelf: "nonfiction_fun", tags: ["nonfiction", "fun", "humor"] },
@@ -49,8 +49,8 @@ export const alsoEnjoy: Record<ArchetypeKey, string[]> = {
   mystery_thriller: ["Eli Raphael", "Jordan Harper", "Tiffany Crum"],
   romance_clean: ["Gracie Ruth Mitchell", "Mhairi McFarlane", "Sophie Kinsella"],
   romance_spicy: ["Olivia Dade", "Joanna Lowell", "Elsie Silver"],
-  fantasy_adventure: ["Andy Weir", "Cixin Liu", "Ursula K. Le Guin"],
-  fantasy_existential: ["Becky Chambers", "N.K. Jemisin", "Ted Chiang"], // EXAMPLE — awaiting Kayla's authors
+  fantasy_adventure: ["Andy Weir", "John Scalzi", "Iain M. Banks"],
+  fantasy_existential: ["Andy Weir", "Ursula K. Le Guin"],
   nonfiction_fun: ["Carlyle Christoff", "Elisabeth Saake", "Caroline Moore", "Summer Jewel Keown"],
   nonfiction_sad: ["Jane McGonigal", "Gretchen Rubin", "Michael Pollan"],
 };
