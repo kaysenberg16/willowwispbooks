@@ -21,8 +21,9 @@ The business sells curated books, handbound journals, miniature book charms, fai
 - `npm run dev` — Start Vite dev server with HMR
 - `npm run build` — Type-check with `tsc` then build for production via Vite
 - `npm run preview` — Preview the production build locally
+- `npm test` — Run the Vitest unit tests (currently the events date logic)
 
-No test framework or linter is configured.
+Vitest is configured (`vitest.config.ts`, node environment). No linter is configured.
 
 ## Architecture
 
@@ -37,7 +38,9 @@ Multi-page static site with no framework. Vite is configured for multi-page buil
 ### Scripts
 
 - **`src/main.ts`** — Homepage JS: mobile menu toggle, scroll fade-in animations (IntersectionObserver), email signup form handler, Instagram gallery with Graph API fetch + static image fallback, lightbox modal.
-- **`src/events.ts`** — Shared JS for secondary pages: mobile menu toggle, fade-in animations, email signup handler. No gallery/modal code.
+- **`src/events.ts`** — Events page JS: mobile menu toggle, fade-in animations, email signup handler, and date-aware rendering of upcoming/past events from `src/events-data.ts` via the pure helpers in `src/events-logic.ts`.
+- **`src/events-logic.ts`** — Pure, unit-tested date logic (`splitEvents`, `nextOccurrence`, formatters). Tested by `src/events-logic.test.ts` (Vitest).
+- **`src/events-data.ts`** — The editable list of events (name, place, dates, optional photos). Kayla's source of truth for what shows on the events page.
 
 ### Styles
 
@@ -55,5 +58,5 @@ Multi-page static site with no framework. Vite is configured for multi-page buil
 - **Instagram integration**: `src/main.ts` reads `VITE_INSTAGRAM_TOKEN` env var at build time. When absent (current state), the gallery falls back to static images defined in the `staticPosts` array.
 - **No component library or templating** — HTML is hand-written; JS operates directly on DOM elements by ID.
 - **Navigation**: Homepage uses anchor links for on-page sections (`#home`, `#find`, `#book`, `#about`) and regular links for separate pages (`/events.html`, `/reviews.html`). Secondary pages link back to homepage sections via `/#find`, `/#book`, etc.
-- **Events are managed in HTML** — no external platform. Kayla updates event `<article>` blocks directly. Events intentionally have no RSVP/ticketing since her events are free and open.
+- **Events are data-driven** — edit `src/events-data.ts`. Each event has a `dates` array of ISO `"YYYY-MM-DD"` strings; `src/events.ts` renders them and `src/events-logic.ts` auto-splits future dates into "Upcoming" and past dates into "Past Events" against today's date (no manual moving). For a past date with photos/credit, use the object form `{ date, photos, credit }`. Events intentionally have no RSVP/ticketing since her events are free and open.
 - **Contact**: `mailto:kayla@willowwispbooks.com` on the "Get in Touch" button in the Book Me section.
