@@ -26,5 +26,5 @@ export const pastPicks: ClubPick[] = [];
 // Paste your Cusdis App ID here to switch the comment box on. Until then the page
 // shows a friendly "opening soon" placeholder. Get it free at https://cusdis.com
 // (create a site → copy the App ID). This is safe to be public.
-export const CUSDIS_APP_ID = "";
+export const CUSDIS_APP_ID = "585c8c66-01e0-4e7c-85b2-66be0c565be9";
 export const CUSDIS_HOST = "https://cusdis.com";
