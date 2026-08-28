@@ -1,5 +1,5 @@
 import "./style.css";
-import { classify, ARCHETYPES, type QuizAnswers, type Genre } from "./quiz-logic.ts";
+import { classify, ARCHETYPES, type QuizAnswers, type Genre, type ArchetypeKey } from "./quiz-logic.ts";
 
 // Where matchmaking + gift requests are delivered. Reuses the existing Formspree
 // form; swap for a dedicated form ID anytime (see CLAUDE.md).
@@ -20,63 +20,115 @@ mobileMenu?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-// --- Quiz definitions (Kayla's real matching flow) ---
-type ChoiceOpt = { e: string; t: string; val: string };
-type ChoiceQ = { type: "choice"; key: "genre" | "ride" | "spice" | "dark"; q: string; hint?: string; opts: ChoiceOpt[] };
-type TextQ = { type: "text"; key: "recent"; q: string; hint?: string; placeholder?: string; optional?: boolean };
-type MultiQ = { type: "multi"; key: "nope"; q: string; hint?: string; opts: string[] };
+// --- Question types ---
+type ChoiceOpt = { e?: string; t: string; val: string };
+type ChoiceQ = { type: "choice"; key: string; q: string; hint?: string; opts: ChoiceOpt[] };
+type TextQ = { type: "text"; key: string; q: string; hint?: string; placeholder?: string; optional?: boolean };
+type MultiQ = { type: "multi"; key: string; q: string; hint?: string; opts: string[] };
 type Question = ChoiceQ | TextQ | MultiQ;
 
 const NOPE_ANYTHING = "Nothing — I'll try anything";
+const TOTAL = 5; // genre + decisive + flavor + recent + hard-no's
 
-const QUESTIONS: Question[] = [
-  {
-    type: "choice", key: "genre", q: "First things first — what's your genre?",
-    opts: [
-      { e: "🕵️", t: "Mystery", val: "mystery" },
-      { e: "💞", t: "Romance", val: "romance" },
-      { e: "🐉", t: "Fantasy & Sci-Fi", val: "fantasy" },
-      { e: "📓", t: "Nonfiction", val: "nonfiction" },
-    ],
-  },
-  {
-    type: "text", key: "recent", q: "What have you read and loved lately?",
-    hint: "A title, an author, or just “anything cozy.” Totally optional.",
-    placeholder: "e.g. anything by T.J. Klune…", optional: true,
-  },
-  {
-    type: "multi", key: "nope", q: "What's a hard no for you?",
-    hint: "Pick any — I'll steer clear.",
-    opts: ["Cliffhangers", "Too much spice", "Heavy or sad endings", "Slow burns", "Gore & violence", NOPE_ANYTHING],
-  },
-  {
-    type: "choice", key: "ride", q: "Emotional rollercoaster, or smooth sailing?",
-    opts: [
-      { e: "🎢", t: "Rollercoaster — wreck me", val: "coaster" },
-      { e: "⛵", t: "Smooth sailing, please", val: "smooth" },
-    ],
-  },
-  {
-    type: "choice", key: "spice", q: "Spice?",
-    opts: [
-      { e: "🌶️", t: "Yes — bring the heat", val: "spicy" },
-      { e: "🧊", t: "Keep it clean", val: "clean" },
-    ],
-  },
-  {
-    type: "choice", key: "dark", q: "Do you like it to get dark?",
-    opts: [
-      { e: "🖤", t: "Go dark", val: "dark" },
-      { e: "🌤️", t: "Keep it light", val: "light" },
-    ],
-  },
-];
+// Q1 — everyone
+const genreQ: ChoiceQ = {
+  type: "choice", key: "genre", q: "First things first — what's your genre?",
+  opts: [
+    { e: "🕵️", t: "Mystery", val: "mystery" },
+    { e: "💞", t: "Romance", val: "romance" },
+    { e: "🐉", t: "Fantasy & Sci-Fi", val: "fantasy" },
+    { e: "📓", t: "Nonfiction", val: "nonfiction" },
+  ],
+};
+
+// Per-genre branch: [decisive (sets shelf), flavor]
+const BRANCH: Record<Genre, Question[]> = {
+  mystery: [
+    {
+      type: "choice", key: "shelf", q: "What's your ideal mystery?",
+      opts: [
+        { e: "☕", t: "Cozy & charming — tea, a nosy amateur sleuth, small-town secrets", val: "mystery_cozy" },
+        { e: "🔪", t: "Twisty & tense — high stakes, can't-trust-anyone, keeps me up at night", val: "mystery_thriller" },
+      ],
+    },
+    {
+      type: "choice", key: "flavor", q: "How much grit?",
+      opts: [
+        { e: "🧩", t: "Clever & bloodless", val: "clever & bloodless" },
+        { e: "🩸", t: "Dark & gritty", val: "dark & gritty" },
+      ],
+    },
+  ],
+  romance: [
+    {
+      type: "choice", key: "shelf", q: "How do you like your romance?",
+      opts: [
+        { e: "🌸", t: "Sweet & swoony — slow-burn, banter, closed-door", val: "romance_clean" },
+        { e: "🔥", t: "Spicy and/or dark — heat, tension, morally-gray love interests", val: "romance_spicy" },
+      ],
+    },
+    {
+      type: "choice", key: "flavor", q: "Angst level?",
+      opts: [
+        { e: "🫖", t: "Cozy comfort", val: "cozy comfort" },
+        { e: "💔", t: "Make me ache", val: "make-me-ache angst" },
+      ],
+    },
+  ],
+  fantasy: [
+    {
+      type: "choice", key: "shelf", q: "What pulls you into a world?",
+      opts: [
+        { e: "🗺️", t: "The adventure — quests, magic, found family, epic fun", val: "fantasy_adventure" },
+        { e: "🌌", t: "The big questions — mind-bending ideas, aching wonder", val: "fantasy_existential" },
+      ],
+    },
+    {
+      type: "choice", key: "flavor", q: "Which way do you lean?",
+      opts: [
+        { e: "⚔️", t: "More fantasy", val: "fantasy-leaning" },
+        { e: "🚀", t: "More sci-fi", val: "sci-fi-leaning" },
+      ],
+    },
+  ],
+  nonfiction: [
+    {
+      type: "choice", key: "shelf", q: "What are you here for?",
+      opts: [
+        { e: "😄", t: "To laugh & learn — witty, surprising, delightful rabbit-holes", val: "nonfiction_fun" },
+        { e: "🫀", t: "To feel & understand — moving memoir that stays with me", val: "nonfiction_sad" },
+      ],
+    },
+    {
+      type: "multi", key: "topics", q: "What topics hook you?", hint: "Pick any.",
+      opts: ["Memoir", "History", "Science", "True crime", "Nature", "Culture & society"],
+    },
+  ],
+};
+
+// Universal tail
+const recentQ: TextQ = {
+  type: "text", key: "recent", q: "What have you read and loved lately?",
+  hint: "A title, an author, or just “anything cozy.” Totally optional.",
+  placeholder: "e.g. anything by T.J. Klune…", optional: true,
+};
+const nopeQ: MultiQ = {
+  type: "multi", key: "nope", q: "What's a hard no for you?",
+  hint: "Pick any — I'll steer clear.",
+  opts: ["Cliffhangers", "Too much spice", "Heavy or sad endings", "Slow burns", "Gore & violence", NOPE_ANYTHING],
+};
 
 // --- State ---
 let step = 0;
 const choiceAns: Record<string, string> = {};
-const nopeSet = new Set<string>();
+const multiSets: Record<string, Set<string>> = { topics: new Set(), nope: new Set() };
 let recentAns = "";
+
+function flow(): Question[] {
+  const g = choiceAns.genre as Genre | undefined;
+  if (!g) return [genreQ];
+  return [genreQ, ...BRANCH[g], recentQ, nopeQ];
+}
 
 const bar = document.getElementById("bar");
 const qcount = document.getElementById("qcount");
@@ -91,11 +143,11 @@ function esc(s: string): string {
 }
 
 function render(): void {
-  const Q = QUESTIONS[step];
-  if (!bar || !qcount || !qtext || !qhint || !opts || !backBtn || !contBtn) return;
+  const Q = flow()[step];
+  if (!Q || !bar || !qcount || !qtext || !qhint || !opts || !backBtn || !contBtn) return;
 
-  bar.style.width = `${(step / QUESTIONS.length) * 100}%`;
-  qcount.textContent = `Question ${step + 1} of ${QUESTIONS.length}`;
+  bar.style.width = `${(step / TOTAL) * 100}%`;
+  qcount.textContent = `Question ${step + 1} of ${TOTAL}`;
   qtext.textContent = Q.q;
   if (Q.hint) {
     qhint.textContent = Q.hint;
@@ -112,8 +164,14 @@ function render(): void {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "quiz-opt";
-      b.innerHTML = `<span class="text-xl">${o.e}</span><span>${o.t}</span>`;
+      b.innerHTML = o.e ? `<span class="text-xl">${o.e}</span><span>${o.t}</span>` : `<span>${o.t}</span>`;
       b.addEventListener("click", () => {
+        if (Q.key === "genre" && choiceAns.genre !== o.val) {
+          // switching genre invalidates the old branch's answers
+          delete choiceAns.shelf;
+          delete choiceAns.flavor;
+          multiSets.topics.clear();
+        }
         choiceAns[Q.key] = o.val;
         next();
       });
@@ -140,19 +198,20 @@ function render(): void {
       next();
     };
   } else {
+    const set = multiSets[Q.key] ?? (multiSets[Q.key] = new Set());
     for (const label of Q.opts) {
       const b = document.createElement("button");
       b.type = "button";
-      b.className = "quiz-opt" + (nopeSet.has(label) ? " sel" : "");
+      b.className = "quiz-opt" + (set.has(label) ? " sel" : "");
       b.innerHTML = `<span>${label}</span>`;
       b.addEventListener("click", () => {
         if (label === NOPE_ANYTHING) {
-          nopeSet.clear();
-          nopeSet.add(label);
+          set.clear();
+          set.add(label);
         } else {
-          nopeSet.delete(NOPE_ANYTHING);
-          if (nopeSet.has(label)) nopeSet.delete(label);
-          else nopeSet.add(label);
+          set.delete(NOPE_ANYTHING);
+          if (set.has(label)) set.delete(label);
+          else set.add(label);
         }
         render();
       });
@@ -173,19 +232,17 @@ backBtn?.addEventListener("click", () => {
 
 function next(): void {
   step++;
-  if (step < QUESTIONS.length) render();
+  if (step < flow().length) render();
   else showResult();
 }
 
 function collect(): QuizAnswers {
-  return {
-    genre: (choiceAns.genre ?? "mystery") as Genre,
-    recent: recentAns,
-    nope: [...nopeSet],
-    ride: (choiceAns.ride ?? "smooth") as QuizAnswers["ride"],
-    spice: (choiceAns.spice ?? "clean") as QuizAnswers["spice"],
-    dark: (choiceAns.dark ?? "light") as QuizAnswers["dark"],
-  };
+  const genre = (choiceAns.genre ?? "mystery") as Genre;
+  const shelf = (choiceAns.shelf ?? "mystery_cozy") as ArchetypeKey;
+  const flavor: string[] = [];
+  if (choiceAns.flavor) flavor.push(choiceAns.flavor);
+  flavor.push(...multiSets.topics);
+  return { genre, shelf, flavor, recent: recentAns, nope: [...multiSets.nope] };
 }
 
 function showResult(): void {
@@ -193,12 +250,13 @@ function showResult(): void {
   if (!body || !bar) return;
   bar.style.width = "100%";
 
-  const ans = collect();
-  const r = ARCHETYPES[classify(ans)];
-  const nopes = ans.nope.filter((n) => n !== NOPE_ANYTHING);
+  const a = collect();
+  const r = ARCHETYPES[classify(a)];
+  const nopes = a.nope.filter((n) => n !== NOPE_ANYTHING);
+  const flavor = a.flavor.filter(Boolean);
 
-  const recentLine = ans.recent
-    ? `<p class="text-sm text-charcoal/65">Because you loved <strong>${esc(ans.recent)}</strong>, I've got ideas already. 😊</p>`
+  const recentLine = a.recent
+    ? `<p class="text-sm text-charcoal/65">Because you loved <strong>${esc(a.recent)}</strong>, I've got ideas already. 😊</p>`
     : "";
   const nopeItems = nopes
     .map((n) => `<span class="font-semibold text-blush-dark">${esc(n.toLowerCase())}</span>`)
@@ -207,7 +265,10 @@ function showResult(): void {
     ? `<p class="text-sm text-charcoal/65">I'll steer clear of ${nopeItems}.</p>`
     : "";
 
-  const vibeValue = esc([`${r.shelf} reader`, ...(nopes.length ? [`no: ${nopes.join(", ")}`] : [])].join(" · "));
+  const vibeBits = [`${r.shelf} reader`];
+  if (flavor.length) vibeBits.push(`likes: ${flavor.join(", ").toLowerCase()}`);
+  if (nopes.length) vibeBits.push(`no: ${nopes.join(", ").toLowerCase()}`);
+  const vibeValue = esc(vibeBits.join(" · "));
 
   body.innerHTML = `
     <div class="text-center">
@@ -246,7 +307,7 @@ function showResult(): void {
         </div>
         <div>
           <label for="m-loved" class="block text-xs uppercase tracking-wider text-navy font-bold mb-1">A book you loved lately</label>
-          <input type="text" id="m-loved" name="loved_lately" value="${esc(ans.recent)}" placeholder="Title — or 'anything cozy'" class="w-full px-4 py-3 bg-warm-white border border-amber-light/40 rounded-lg text-sm placeholder-charcoal/30 focus:outline-none focus:border-teal transition" />
+          <input type="text" id="m-loved" name="loved_lately" value="${esc(a.recent)}" placeholder="Title — or 'anything cozy'" class="w-full px-4 py-3 bg-warm-white border border-amber-light/40 rounded-lg text-sm placeholder-charcoal/30 focus:outline-none focus:border-teal transition" />
         </div>
         <div>
           <label for="m-vibe" class="block text-xs uppercase tracking-wider text-navy font-bold mb-1">Your reading vibe &amp; hard-no's</label>

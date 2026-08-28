@@ -1,22 +1,22 @@
 // Pure quiz logic for "Find Your Next Read".
-// Mirrors Kayla's in-person flow: genre first, then modifiers, mapping to one of 8 shelves.
+// Branching flow: genre first, then a genre-specific decisive question that picks
+// the shelf directly, plus a flavor question. "No heavy/sad endings" gently steers lighter.
 
 export type Genre = "mystery" | "romance" | "fantasy" | "nonfiction";
-
-export type QuizAnswers = {
-  genre: Genre;
-  recent: string; // free text, optional
-  nope: string[]; // hard-no selections
-  ride: "coaster" | "smooth";
-  spice: "spicy" | "clean";
-  dark: "dark" | "light";
-};
 
 export type ArchetypeKey =
   | "mystery_cozy" | "mystery_thriller"
   | "romance_clean" | "romance_spicy"
   | "fantasy_adventure" | "fantasy_existential"
   | "nonfiction_fun" | "nonfiction_sad";
+
+export type QuizAnswers = {
+  genre: Genre;
+  shelf: ArchetypeKey; // chosen via the genre's decisive question
+  flavor: string[];    // flavor answer(s): grit / angst / lean / topics
+  recent: string;      // free text, optional
+  nope: string[];      // hard-no selections
+};
 
 export type Archetype = {
   name: string;
@@ -76,31 +76,18 @@ export const ARCHETYPES: Record<ArchetypeKey, Archetype> = {
   },
 };
 
+// Hard-no "Heavy or sad endings" nudges these shelves to their lighter sibling.
 const LIGHTER: Partial<Record<ArchetypeKey, ArchetypeKey>> = {
   mystery_thriller: "mystery_cozy",
   fantasy_existential: "fantasy_adventure",
   nonfiction_sad: "nonfiction_fun",
 };
 
-function baseKey(a: QuizAnswers): ArchetypeKey {
-  const heavy = a.dark === "dark" || a.ride === "coaster";
-  switch (a.genre) {
-    case "mystery":
-      return heavy ? "mystery_thriller" : "mystery_cozy";
-    case "romance":
-      return (a.spice === "spicy" || a.dark === "dark") ? "romance_spicy" : "romance_clean";
-    case "fantasy":
-      return heavy ? "fantasy_existential" : "fantasy_adventure";
-    case "nonfiction":
-      return heavy ? "nonfiction_sad" : "nonfiction_fun";
-  }
-}
+export const NO_HEAVY = "Heavy or sad endings";
 
 export function classify(a: QuizAnswers): ArchetypeKey {
-  const key = baseKey(a);
-  // "No heavy/sad endings" bumps toward the lighter shelf of that genre.
-  if (a.nope.includes("Heavy or sad endings")) {
-    return LIGHTER[key] ?? key;
+  if (a.nope.includes(NO_HEAVY)) {
+    return LIGHTER[a.shelf] ?? a.shelf;
   }
-  return key;
+  return a.shelf;
 }
