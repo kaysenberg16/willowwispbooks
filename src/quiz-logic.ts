@@ -70,9 +70,9 @@ export const ARCHETYPES: Record<ArchetypeKey, Archetype> = {
   },
   nonfiction_sad: {
     name: "The Earnest Empath",
-    shelf: "Nonfiction — Sad / Profound",
-    genreLabel: "Profound Nonfiction",
-    blurb: "You read to feel and understand. Memoir and true stories that sit in your chest for weeks.",
+    shelf: "Nonfiction — Thoughtful",
+    genreLabel: "Thoughtful Nonfiction",
+    blurb: "You read to think and to feel — big ideas and true stories that shift how you see the world and stay with you.",
   },
 };
 

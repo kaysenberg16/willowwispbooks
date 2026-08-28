@@ -1,7 +1,7 @@
 import "./style.css";
 import { classify, ARCHETYPES, type QuizAnswers, type Genre, type ArchetypeKey } from "./quiz-logic.ts";
 import { bestMatch, surprisePick, type Book } from "./books-logic.ts";
-import { books, alsoEnjoy } from "./books-data.ts";
+import { books, alsoEnjoy, bonusSuggestions } from "./books-data.ts";
 
 // Where matchmaking + gift requests are delivered. Reuses the existing Formspree
 // form; swap for a dedicated form ID anytime (see CLAUDE.md).
@@ -98,7 +98,7 @@ const BRANCH: Record<Genre, Question[]> = {
       type: "choice", key: "shelf", q: "What are you here for?",
       opts: [
         { e: "😄", t: "To laugh & learn — witty, surprising, delightful rabbit-holes", val: "nonfiction_fun" },
-        { e: "🫀", t: "To feel & understand — moving memoir that stays with me", val: "nonfiction_sad" },
+        { e: "🫀", t: "To think & feel — big ideas and stories that stay with me", val: "nonfiction_sad" },
       ],
     },
     {
@@ -301,6 +301,12 @@ function alsoEnjoyHTML(shelf: ArchetypeKey): string {
     : "";
 }
 
+function bonusHTML(shelf: ArchetypeKey): string {
+  const b = bonusSuggestions[shelf];
+  if (!b) return "";
+  return `<div class="max-w-md mx-auto mb-5 bg-cream border border-blush/40 rounded-xl px-4 py-3"><p class="text-sm text-charcoal/80">${esc(b.prompt)} &rarr; <strong class="text-blush-dark">${esc(b.title)}</strong> <span class="text-charcoal/55">by ${esc(b.author)}</span></p></div>`;
+}
+
 type ResultView = {
   name: string;
   sub: string;
@@ -309,6 +315,7 @@ type ResultView = {
   desc: string;
   reveal: string;
   alsoHtml: string;
+  bonus: string;
   ctaLabel: string;
   quizResult: string;
   vibeValue: string;
@@ -329,6 +336,7 @@ function resultShell(v: ResultView): string {
 
       ${v.reveal}
       ${v.alsoHtml}
+      ${v.bonus}
 
       <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">${v.ctaLabel}</button>
       <div class="mt-3"><button type="button" id="retake" class="text-teal-dark text-sm hover:underline">↺ retake the quiz</button></div>
@@ -394,6 +402,7 @@ function showResult(): void {
       desc: descLines(recentAns, nopes),
       reveal: pick ? matchCard(pick) : genreCard("Surprise Me"),
       alsoHtml: pick ? alsoEnjoyHTML(pick.shelf) : "",
+      bonus: pick ? bonusHTML(pick.shelf) : "",
       ctaLabel: pick ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real",
       quizResult: pick ? `The Open Book · ${pick.title}` : "The Open Book",
       vibeValue: esc(vibeBits.join(" · ")),
@@ -420,6 +429,7 @@ function showResult(): void {
     desc: descLines(a.recent, nopes),
     reveal: match ? matchCard(match) : genreCard(r.genreLabel),
     alsoHtml: alsoEnjoyHTML(classify(a)),
+    bonus: bonusHTML(classify(a)),
     ctaLabel: match ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real",
     quizResult: `${r.name} · ${r.shelf}`,
     vibeValue: esc(vibeBits.join(" · ")),

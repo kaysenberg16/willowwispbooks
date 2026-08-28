@@ -29,7 +29,7 @@ const SHELF_TAG: Record<ArchetypeKey, string> = {
   fantasy_adventure: "adventure",
   fantasy_existential: "existential",
   nonfiction_fun: "fun",
-  nonfiction_sad: "sad",
+  nonfiction_sad: "thoughtful",
 };
 
 // Flavor answers (lowercased) → a concise tag.
