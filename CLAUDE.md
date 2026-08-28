@@ -43,7 +43,9 @@ Multi-page static site with no framework. Vite is configured for multi-page buil
 - **`src/events-logic.ts`** — Pure, unit-tested date logic (`splitEvents`, `nextOccurrence`, formatters). Tested by `src/events-logic.test.ts` (Vitest).
 - **`src/events-data.ts`** — The editable list of events (name, place, dates, optional photos). Kayla's source of truth for what shows on the events page.
 - **`src/quiz.ts`** — Quiz page JS: mobile menu, the quiz engine (6 questions), and result rendering with a pre-filled matchmaking form. Imports the pure logic from `src/quiz-logic.ts`.
-- **`src/quiz-logic.ts`** — Pure, unit-tested quiz logic: the 8 archetypes (`ARCHETYPES`) and `classify()` that maps answers → shelf. Archetype names/blurbs are edited here. Tested by `src/quiz-logic.test.ts`.
+- **`src/quiz-logic.ts`** — Pure, unit-tested quiz logic: the 8 archetypes (`ARCHETYPES`) and `classify()` that maps answers → shelf (hard-no's "heavy/sad" and "too much spice" can steer the shelf). Archetype names/blurbs are edited here. Tested by `src/quiz-logic.test.ts`.
+- **`src/books-logic.ts`** — Tag-based book matching: turns answers into wanted tags + dealbreaker tags and returns the single closest book (`bestMatch`). Tag vocabulary documented in `src/books-data.ts`. Tested by `src/books-logic.test.ts`.
+- **`src/books-data.ts`** — The tagged book catalog the quiz recommends from. **Currently seeded with EXAMPLE books — Kayla replaces these with her curated favorites.** Each book: title, author, `shelf`, `tags`, optional `cover`/`blurb`.
 
 ### Styles
 

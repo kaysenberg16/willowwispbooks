@@ -1,5 +1,7 @@
 import "./style.css";
 import { classify, ARCHETYPES, type QuizAnswers, type Genre, type ArchetypeKey } from "./quiz-logic.ts";
+import { bestMatch, type Book } from "./books-logic.ts";
+import { books } from "./books-data.ts";
 
 // Where matchmaking + gift requests are delivered. Reuses the existing Formspree
 // form; swap for a dedicated form ID anytime (see CLAUDE.md).
@@ -142,6 +144,38 @@ function esc(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+function matchCard(book: Book): string {
+  const cover = book.cover
+    ? `<img src="${book.cover}" alt="${esc(book.title)}" class="w-full h-full object-cover" />`
+    : `<div class="w-full h-full bg-gradient-to-br from-navy to-teal flex items-center justify-center p-2 text-center"><span class="font-display text-white text-xs leading-tight">${esc(book.title)}</span></div>`;
+  const chips = book.tags.slice(0, 4)
+    .map((t) => `<span class="bg-cream-dark text-charcoal/70 text-[0.62rem] px-2 py-0.5 rounded-full">${esc(t)}</span>`)
+    .join("");
+  const blurb = book.blurb ? `<p class="text-xs text-charcoal/60 mt-1.5">${esc(book.blurb)}</p>` : "";
+  return `
+    <div class="max-w-sm mx-auto my-6 bg-warm-white border border-amber-light/40 rounded-2xl shadow-lg overflow-hidden text-left">
+      <p class="text-center text-xs uppercase tracking-[0.22em] text-amber font-bold pt-3">✦ Your blind date ✦</p>
+      <div class="flex gap-3 p-4 pt-2">
+        <div class="w-20 h-28 flex-shrink-0 rounded-md overflow-hidden shadow">${cover}</div>
+        <div class="min-w-0">
+          <h3 class="font-display text-lg text-navy leading-tight">${esc(book.title)}</h3>
+          <p class="text-xs text-charcoal/60 mb-2">by ${esc(book.author)}</p>
+          <div class="flex flex-wrap gap-1">${chips}</div>
+          ${blurb}
+        </div>
+      </div>
+    </div>`;
+}
+
+function genreCard(genreLabel: string): string {
+  return `
+    <div class="blind-wrap max-w-xs mx-auto my-6 shadow-lg" style="background-image:url('/images/blind dates.jpg')">
+      <div class="font-script text-xl">✦ your blind date ✦</div>
+      <div class="font-display text-xl mt-0.5">${esc(genreLabel)}</div>
+      <div class="text-xs uppercase tracking-[0.1em] opacity-90 mt-1">hand-wrapped by Kayla</div>
+    </div>`;
+}
+
 function render(): void {
   const Q = flow()[step];
   if (!Q || !bar || !qcount || !qtext || !qhint || !opts || !backBtn || !contBtn) return;
@@ -265,7 +299,12 @@ function showResult(): void {
     ? `<p class="text-sm text-charcoal/65">I'll steer clear of ${nopeItems}.</p>`
     : "";
 
+  const match = bestMatch(books, a);
+  const reveal = match ? matchCard(match) : genreCard(r.genreLabel);
+  const ctaLabel = match ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real";
+
   const vibeBits = [`${r.shelf} reader`];
+  if (match) vibeBits.push(`matched to: ${match.title}`);
   if (flavor.length) vibeBits.push(`likes: ${flavor.join(", ").toLowerCase()}`);
   if (nopes.length) vibeBits.push(`no: ${nopes.join(", ").toLowerCase()}`);
   const vibeValue = esc(vibeBits.join(" · "));
@@ -281,13 +320,9 @@ function showResult(): void {
         ${recentLine}${nopeLine}
       </div>
 
-      <div class="blind-wrap max-w-xs mx-auto my-6 shadow-lg" style="background-image:url('/images/blind dates.jpg')">
-        <div class="font-script text-xl">✦ your blind date ✦</div>
-        <div class="font-display text-xl mt-0.5">${esc(r.genreLabel)}</div>
-        <div class="text-xs uppercase tracking-[0.1em] opacity-90 mt-1">hand-wrapped by Kayla</div>
-      </div>
+      ${reveal}
 
-      <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">💌 Let Kayla match me for real</button>
+      <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">${ctaLabel}</button>
       <div class="mt-3"><button type="button" id="retake" class="text-teal-dark text-sm hover:underline">↺ retake the quiz</button></div>
 
       <form action="${FORMSPREE_ENDPOINT}" method="POST" id="match-form" class="hidden text-left bg-cream border border-dashed border-teal/50 rounded-2xl p-6 mt-6 space-y-4">
