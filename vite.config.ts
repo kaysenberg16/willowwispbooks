@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         events: resolve(__dirname, "events.html"),
+        quiz: resolve(__dirname, "quiz.html"),
         reviews: resolve(__dirname, "reviews.html"),
         submissions: resolve(__dirname, "submissions.html"),
       },
