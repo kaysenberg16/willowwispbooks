@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { wantedTags, dealbreakerTags, bestMatch, type Book } from "./books-logic.ts";
-import { type QuizAnswers } from "./quiz-logic.ts";
-import { books } from "./books-data.ts";
+import { type QuizAnswers, type ArchetypeKey } from "./quiz-logic.ts";
+import { books, alsoEnjoy } from "./books-data.ts";
 
 function ans(partial: Partial<QuizAnswers>): QuizAnswers {
   return { genre: "romance", shelf: "romance_clean", flavor: [], recent: "", nope: [], ...partial };
@@ -74,6 +74,13 @@ describe("seed catalog is matchable", () => {
       const m = bestMatch(books, ans({ genre, shelf, nope: [] }));
       expect(m, `shelf ${shelf}`).not.toBeNull();
       expect(m?.shelf, `shelf ${shelf}`).toBe(shelf);
+    }
+  });
+
+  it("has 'you might also enjoy' authors for every shelf", () => {
+    for (const shelf of shelves as readonly ArchetypeKey[]) {
+      expect(alsoEnjoy[shelf], `shelf ${shelf}`).toBeDefined();
+      expect(alsoEnjoy[shelf].length, `shelf ${shelf}`).toBeGreaterThan(0);
     }
   });
 });

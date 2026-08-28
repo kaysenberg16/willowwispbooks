@@ -1,6 +1,9 @@
 import type { Book } from "./books-logic.ts";
+import type { ArchetypeKey } from "./quiz-logic.ts";
 
 // ⚠️ EXAMPLE CATALOG — Kayla replaces these with her curated favorites.
+// This is the MONTHLY ROTATING SET — keep it to ~8 (one featured pick per shelf)
+// and swap them each month; the quiz reveals the reader's shelf pick as their blind date.
 // Each book needs: title, author, `shelf` (one of the 8 keys), and `tags`.
 // Optional: `cover` (a path like "/images/Book Cover Images/xyz.jpg" — drop the
 // file into public/images first) and a one-line `blurb`.
@@ -47,3 +50,16 @@ export const books: Book[] = [
   { title: "Educated", author: "Tara Westover", shelf: "nonfiction_sad", tags: ["nonfiction", "memoir", "sad", "heavy"] },
   { title: "When Breath Becomes Air", author: "Paul Kalanithi", shelf: "nonfiction_sad", tags: ["nonfiction", "memoir", "sad", "heavy", "sad-ending"] },
 ];
+
+// "You might also enjoy…" — a few other authors suggested per shelf, shown under
+// the matched book. More evergreen than the monthly picks; edit whenever. (Examples.)
+export const alsoEnjoy: Record<ArchetypeKey, string[]> = {
+  mystery_cozy: ["Agatha Christie", "Alan Bradley", "Jenn McKinlay"],
+  mystery_thriller: ["Tana French", "Ruth Ware", "Lisa Jewell"],
+  romance_clean: ["Emily Henry", "Jenny Han", "Kasie West"],
+  romance_spicy: ["Ali Hazelwood", "Tessa Bailey", "Sarah J. Maas"],
+  fantasy_adventure: ["Brandon Sanderson", "Rick Riordan", "Tamora Pierce"],
+  fantasy_existential: ["Ursula K. Le Guin", "Becky Chambers", "N.K. Jemisin"],
+  nonfiction_fun: ["Mary Roach", "Bill Bryson", "Trevor Noah"],
+  nonfiction_sad: ["Joan Didion", "Michelle Zauner", "Cheryl Strayed"],
+};

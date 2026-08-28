@@ -1,7 +1,7 @@
 import "./style.css";
 import { classify, ARCHETYPES, type QuizAnswers, type Genre, type ArchetypeKey } from "./quiz-logic.ts";
 import { bestMatch, type Book } from "./books-logic.ts";
-import { books } from "./books-data.ts";
+import { books, alsoEnjoy } from "./books-data.ts";
 
 // Where matchmaking + gift requests are delivered. Reuses the existing Formspree
 // form; swap for a dedicated form ID anytime (see CLAUDE.md).
@@ -299,9 +299,15 @@ function showResult(): void {
     ? `<p class="text-sm text-charcoal/65">I'll steer clear of ${nopeItems}.</p>`
     : "";
 
+  const matchedShelf = classify(a);
   const match = bestMatch(books, a);
   const reveal = match ? matchCard(match) : genreCard(r.genreLabel);
   const ctaLabel = match ? "💌 Ask Kayla to wrap this for me" : "💌 Let Kayla match me for real";
+
+  const extras = alsoEnjoy[matchedShelf] ?? [];
+  const alsoHtml = extras.length
+    ? `<div class="max-w-md mx-auto mb-5"><p class="text-xs uppercase tracking-[0.16em] text-amber font-bold mb-1">You might also enjoy</p><p class="text-sm text-charcoal/70">${extras.map(esc).join(" &middot; ")}</p></div>`
+    : "";
 
   const vibeBits = [`${r.shelf} reader`];
   if (match) vibeBits.push(`matched to: ${match.title}`);
@@ -321,6 +327,7 @@ function showResult(): void {
       </div>
 
       ${reveal}
+      ${alsoHtml}
 
       <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">${ctaLabel}</button>
       <div class="mt-3"><button type="button" id="retake" class="text-teal-dark text-sm hover:underline">↺ retake the quiz</button></div>
