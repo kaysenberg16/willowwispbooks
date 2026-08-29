@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   parseEventDate, startOfToday,
   splitEvents, nextOccurrence, formatChip, formatFull, isWithinDays,
+  upcomingPreview,
   type WWEvent,
 } from "./events-logic.ts";
 
@@ -58,6 +59,17 @@ describe("splitEvents", () => {
   it("preserves photos on a past occurrence", () => {
     const bees = past.find((p) => p.event.name === "Bees in the Burbs");
     expect(bees?.occurrence.photos).toEqual(["/images/Bees.jpeg"]);
+  });
+});
+
+describe("upcomingPreview", () => {
+  it("returns only upcoming events with just their future dates, soonest first", () => {
+    const previews = upcomingPreview(sample, TODAY);
+    expect(previews.map((p) => p.event.name)).toEqual(["Farmers Market"]);
+    expect(previews[0].dateLabel).toBe("Sep 5, Oct 3");
+  });
+  it("respects a limit", () => {
+    expect(upcomingPreview(sample, TODAY, 0)).toHaveLength(0);
   });
 });
 

@@ -1,4 +1,6 @@
 import "./style.css";
+import { events } from "./events-data.ts";
+import { upcomingPreview, startOfToday, type EventPreview } from "./events-logic.ts";
 
 // --- Mobile menu toggle ---
 const menuToggle = document.getElementById("menu-toggle");
@@ -16,6 +18,29 @@ mobileMenu?.querySelectorAll("a").forEach((link) => {
     menuToggle?.setAttribute("aria-expanded", "false");
   });
 });
+
+// --- Homepage upcoming-events preview (date-aware, from events-data.ts) ---
+const homeEventsEl = document.getElementById("home-events");
+if (homeEventsEl) {
+  const previews = upcomingPreview(events, startOfToday(new Date()), 3);
+  if (previews.length === 0) {
+    homeEventsEl.innerHTML =
+      `<p class="text-center text-white/60 text-sm">Fresh dates are in the works &mdash; <a href="/events.html" class="text-amber-light underline">see the events page</a>.</p>`;
+  } else {
+    homeEventsEl.innerHTML = previews.map(homeEventCard).join("");
+  }
+}
+
+function homeEventCard(p: EventPreview): string {
+  const ev = p.event;
+  const img = ev.image
+    ? `<div class="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden"><img src="${ev.image}" alt="${ev.name}" class="w-full h-full object-cover" /></div>`
+    : "";
+  const topLine = ev.time
+    ? `<p class="text-xs text-charcoal/50 uppercase tracking-wider">${ev.time}</p>`
+    : `<p class="text-xs text-charcoal/50">${ev.place}</p>`;
+  return `<article class="bg-warm-white text-charcoal rounded-xl p-5 flex flex-col sm:flex-row sm:items-center gap-4 shadow-sm">${img}<div class="flex-1">${topLine}<h3 class="font-display text-base text-navy font-semibold">${ev.name}</h3><p class="text-sm text-charcoal/60">${p.dateLabel}</p></div></article>`;
+}
 
 // --- Scroll fade-in observer ---
 const fadeEls = document.querySelectorAll(".fade-in");
