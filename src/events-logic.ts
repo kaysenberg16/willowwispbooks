@@ -65,6 +65,19 @@ export function splitEvents(
   return { upcoming, past };
 }
 
+export type EventPreview = { event: WWEvent; dateLabel: string };
+
+// Compact upcoming list for the homepage preview: each upcoming event with only
+// its future dates as a comma-separated label, soonest first, optionally limited.
+export function upcomingPreview(events: WWEvent[], today: Date, limit?: number): EventPreview[] {
+  const { upcoming } = splitEvents(events, today);
+  const items = upcoming.map((u) => ({
+    event: u.event,
+    dateLabel: u.futureDates.map(formatChip).join(", "),
+  }));
+  return typeof limit === "number" ? items.slice(0, limit) : items;
+}
+
 export function nextOccurrence(
   events: WWEvent[],
   today: Date,
