@@ -10,7 +10,7 @@ export const events: WWEvent[] = [
     address: "25719 Maple Valley Black Diamond Rd SE, Maple Valley, WA 98038",
     time: "Saturdays, 9:00 AM – 2:00 PM",
     image: "/images/Maple Valley Farmer's Market.png",
-    dates: ["2026-09-05", "2026-10-03", "2026-10-17", "2026-10-31", "2026-08-01", "2026-05-02"],
+    dates: ["2026-09-05", "2026-10-03", "2026-10-31", "2026-08-01", "2026-05-02"],
   },
   {
     name: "NW Metaphysical Market",
