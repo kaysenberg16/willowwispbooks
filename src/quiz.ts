@@ -1,7 +1,18 @@
 import "./style.css";
 import { classify, ARCHETYPES, type QuizAnswers, type Genre, type ArchetypeKey } from "./quiz-logic.ts";
-import { bestMatch, surprisePick, type Book } from "./books-logic.ts";
-import { books, alsoEnjoy, bonusSuggestions } from "./books-data.ts";
+import { bestMatch, surprisePick, bookshopUrl, type Book } from "./books-logic.ts";
+import { books, alsoEnjoy, bonusSuggestions, BOOKSHOP_AFFILIATE_ID, AFFILIATE_DISCLOSURE } from "./books-data.ts";
+
+function buyButton(item: { isbn?: string; buyUrl?: string }): string {
+  const url = bookshopUrl(item, BOOKSHOP_AFFILIATE_ID);
+  return url
+    ? `<a href="${url}" target="_blank" rel="sponsored noopener noreferrer" class="inline-block mt-2 bg-sage hover:bg-sage/80 text-white px-4 py-1.5 rounded-full text-xs font-bold transition-colors">🛍️ Buy on Bookshop.org</a>`
+    : "";
+}
+
+const DISCLOSURE_HTML = BOOKSHOP_AFFILIATE_ID
+  ? `<p class="text-xs text-charcoal/40 max-w-md mx-auto mt-4 leading-snug">${AFFILIATE_DISCLOSURE}</p>`
+  : "";
 
 // Where matchmaking + gift requests are delivered. Reuses the existing Formspree
 // form; swap for a dedicated form ID anytime (see CLAUDE.md).
@@ -163,6 +174,7 @@ function matchCard(book: Book): string {
           <p class="text-xs text-charcoal/60 mb-2">by ${esc(book.author)}</p>
           <div class="flex flex-wrap gap-1">${chips}</div>
           ${blurb}
+          ${buyButton(book)}
         </div>
       </div>
     </div>`;
@@ -304,7 +316,8 @@ function alsoEnjoyHTML(shelf: ArchetypeKey): string {
 function bonusHTML(shelf: ArchetypeKey): string {
   const b = bonusSuggestions[shelf];
   if (!b) return "";
-  return `<div class="max-w-md mx-auto mb-5 bg-cream border border-blush/40 rounded-xl px-4 py-3"><p class="text-sm text-charcoal/80">${esc(b.prompt)} &rarr; <strong class="text-blush-dark">${esc(b.title)}</strong> <span class="text-charcoal/55">by ${esc(b.author)}</span></p></div>`;
+  const buy = buyButton(b);
+  return `<div class="max-w-md mx-auto mb-5 bg-cream border border-blush/40 rounded-xl px-4 py-3"><p class="text-sm text-charcoal/80">${esc(b.prompt)} &rarr; <strong class="text-blush-dark">${esc(b.title)}</strong> <span class="text-charcoal/55">by ${esc(b.author)}</span></p>${buy}</div>`;
 }
 
 type ResultView = {
@@ -341,6 +354,7 @@ function resultShell(v: ResultView): string {
 
       <button type="button" id="open-match" class="inline-block bg-amber hover:bg-amber-light text-navy px-8 py-3 rounded-full text-xs uppercase tracking-[0.12em] font-bold transition-colors shadow-md">${v.ctaLabel}</button>
       <div class="mt-3"><button type="button" id="retake" class="text-teal-dark text-sm hover:underline">↺ retake the quiz</button></div>
+      ${DISCLOSURE_HTML}
 
       <form action="${FORMSPREE_ENDPOINT}" method="POST" id="match-form" class="hidden text-left bg-cream border border-dashed border-teal/50 rounded-2xl p-6 mt-6 space-y-4">
         <input type="hidden" name="_subject" value="💌 Reader match request — Willow Wisp Books" />

@@ -1,5 +1,7 @@
 import "./style.css";
 import { currentPick, pastPicks, CUSDIS_APP_ID, CUSDIS_HOST } from "./club-data.ts";
+import { bookshopUrl } from "./books-logic.ts";
+import { BOOKSHOP_AFFILIATE_ID, AFFILIATE_DISCLOSURE } from "./books-data.ts";
 
 // --- Mobile menu toggle ---
 const menuToggle = document.getElementById("menu-toggle");
@@ -30,6 +32,14 @@ if (pickEl) {
     ? `<div class="mt-8 text-center"><p class="text-xs uppercase tracking-[0.16em] text-amber font-bold mb-1">Past reads</p><p class="text-sm text-charcoal/60">${pastPicks.map((p) => `${esc(p.title)} — ${esc(p.author)}`).join(" &middot; ")}</p></div>`
     : "";
 
+  const buyUrl = bookshopUrl(currentPick, BOOKSHOP_AFFILIATE_ID);
+  const buyBtn = buyUrl
+    ? `<a href="${buyUrl}" target="_blank" rel="sponsored noopener noreferrer" class="inline-block mt-3 bg-sage hover:bg-sage/80 text-white px-5 py-2 rounded-full text-xs font-bold transition-colors">🛍️ Get the book on Bookshop.org</a>`
+    : "";
+  const disclosure = BOOKSHOP_AFFILIATE_ID
+    ? `<p class="text-xs text-charcoal/40 text-center mt-4 leading-snug">${AFFILIATE_DISCLOSURE}</p>`
+    : "";
+
   pickEl.innerHTML = `
     <div class="bg-warm-white rounded-2xl shadow-lg border border-amber-light/30 overflow-hidden">
       <div class="flex flex-col sm:flex-row gap-5 p-6">
@@ -39,9 +49,11 @@ if (pickEl) {
           <h2 class="font-display text-2xl text-navy leading-tight mt-1">${esc(currentPick.title)}</h2>
           <p class="text-sm text-charcoal/60 mb-3">by ${esc(currentPick.author)}</p>
           <p class="text-sm text-charcoal/75 leading-relaxed">${esc(currentPick.blurb)}</p>
+          ${buyBtn}
         </div>
       </div>
     </div>
+    ${disclosure}
     ${past}`;
 }
 

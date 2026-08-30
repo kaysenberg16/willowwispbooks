@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { wantedTags, dealbreakerTags, bestMatch, surprisePick, type Book } from "./books-logic.ts";
+import { wantedTags, dealbreakerTags, bestMatch, surprisePick, bookshopUrl, type Book } from "./books-logic.ts";
 import { type QuizAnswers, type ArchetypeKey } from "./quiz-logic.ts";
 import { books, alsoEnjoy } from "./books-data.ts";
 
@@ -78,6 +78,19 @@ describe("surprisePick (I'll read anything)", () => {
   it("returns null when every book is excluded", () => {
     const cat3: Book[] = [{ title: "S", author: "x", shelf: "romance_spicy", tags: ["spicy"] }];
     expect(surprisePick(cat3, ["Too much spice"])).toBeNull();
+  });
+});
+
+describe("bookshopUrl", () => {
+  it("builds an affiliate link from affiliate id + isbn", () => {
+    expect(bookshopUrl({ isbn: "9781234567897" }, "12345")).toBe("https://bookshop.org/a/12345/9781234567897");
+  });
+  it("prefers an explicit buyUrl over building one", () => {
+    expect(bookshopUrl({ isbn: "9781234567897", buyUrl: "https://bookshop.org/a/9/x" }, "12345")).toBe("https://bookshop.org/a/9/x");
+  });
+  it("returns null when the affiliate id or isbn is missing", () => {
+    expect(bookshopUrl({ isbn: "9781234567897" }, "")).toBeNull();
+    expect(bookshopUrl({}, "12345")).toBeNull();
   });
 });
 
