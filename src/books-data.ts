@@ -36,9 +36,17 @@ export const books: Book[] = [
   { title: "The Decomposition Book", author: "Sara van Os", shelf: "mystery_thriller", tags: ["gothic", "horror", "dark"], wildcard: true, blurb: "A gothic/horror wildcard — for when you'll read anything." },
 ];
 
+// ── Bookshop.org affiliate ─────────────────────────────────────────────────
+// Paste your Bookshop affiliate ID here (a number, found at the top of your
+// profile page). Once set, a "Buy on Bookshop.org" button appears on any book
+// that has an `isbn` (or a full `buyUrl`). Empty = no buy buttons yet.
+export const BOOKSHOP_AFFILIATE_ID = "";
+export const AFFILIATE_DISCLOSURE =
+  "As a Bookshop.org affiliate, Willow Wisp earns a small commission from qualifying purchases — at no extra cost to you.";
+
 // Shelf-specific bonus suggestion shown under the matched book. E.g. spicy readers
 // get nudged toward something extra-unhinged.
-export const bonusSuggestions: Partial<Record<ArchetypeKey, { prompt: string; title: string; author: string }>> = {
+export const bonusSuggestions: Partial<Record<ArchetypeKey, { prompt: string; title: string; author: string; isbn?: string; buyUrl?: string }>> = {
   romance_spicy: { prompt: "Want something super unhinged?", title: "The Witchwood Boys", author: "C.M. Stunich" },
 };
 

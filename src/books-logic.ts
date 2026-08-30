@@ -12,7 +12,18 @@ export type Book = {
   cover?: string;      // optional path under /images
   blurb?: string;      // optional one-liner
   wildcard?: boolean;  // Kayla's "if you'll read anything, read THIS" pick
+  isbn?: string;       // ISBN-13 → builds a Bookshop.org affiliate link
+  buyUrl?: string;     // optional full affiliate link (overrides the ISBN build)
 };
+
+// Build a Bookshop.org affiliate buy link. Prefers an explicit buyUrl; otherwise
+// constructs bookshop.org/a/<affiliateId>/<isbn> when both are present. Null when
+// there's nothing to link to (so the button simply doesn't render).
+export function bookshopUrl(item: { isbn?: string; buyUrl?: string }, affiliateId: string): string | null {
+  if (item.buyUrl) return item.buyUrl;
+  if (item.isbn && affiliateId) return `https://bookshop.org/a/${affiliateId}/${item.isbn}`;
+  return null;
+}
 
 const GENRE_TAG: Record<Genre, string> = {
   mystery: "mystery",

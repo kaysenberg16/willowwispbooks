@@ -8,6 +8,8 @@ export type ClubPick = {
   blurb: string;      // why we're reading it / what to expect
   cover?: string;     // optional path under /images
   threadId: string;   // unique discussion id for this pick (e.g. "unhinged-2026-08")
+  isbn?: string;      // ISBN-13 → builds a Bookshop.org affiliate buy link
+  buyUrl?: string;    // optional full affiliate link (overrides the ISBN build)
 };
 
 // Kayla sets a new pick each month.
