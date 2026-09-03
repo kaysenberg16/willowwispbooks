@@ -159,7 +159,7 @@ const staticPosts: { src: string; caption: string }[] = [
   { src: "/images/CCB 3.22 (2).jpeg", caption: "All set up and ready for a great day at the market!" },
   { src: "/images/IMG_0643.jpeg", caption: "Inside the trailer — celestial tapestry, fairy lights, and books galore" },
   { src: "/images/IMG_0424.jpeg", caption: "Handmade miniature book charms — each one unique" },
-  { src: "/images/IMG_0629.jpeg", caption: "A fairy library nestled in a twig sphere" },
+  { src: "/images/NW Metaphysical MarketMe.jpg", caption: "At the NW Metaphysical Market in Tacoma" },
   { src: "/images/IMG_0390.jpeg", caption: "Handbound journal with marbled cover — coptic stitch binding" },
   { src: "/images/blind dates.jpg", caption: "Blind dates with a book — hand-wrapped and ready to go" },
   { src: "/images/CCB Customers 10.17.jpg", caption: "Happy visitors browsing inside the trailer!" },
