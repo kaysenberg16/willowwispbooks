@@ -13,6 +13,14 @@ export const events: WWEvent[] = [
     dates: ["2026-09-05", "2026-10-03", "2026-10-31", "2026-08-01", "2026-05-02"],
   },
   {
+    name: "The Witching Hour: An Enchanted Market",
+    place: "Gig Harbor, WA",
+    address: "Volunteer Vern Pavilion, Gig Harbor, WA",
+    time: "5:00 – 8:00 PM",
+    image: "/images/the-witching-hour.jpg",
+    dates: ["2026-09-10"],
+  },
+  {
     name: "NW Metaphysical Market",
     place: "Tacoma, WA",
     image: "/images/NW Metaphysical MarketMe.jpg",
