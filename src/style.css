@@ -59,7 +59,11 @@ body {
   background: linear-gradient(90deg, transparent 0%, var(--color-amber) 50%, transparent 100%);
   border: none;
   max-width: 200px;
-  margin: 0 auto;
+  /* Horizontal centering only. The vertical margins are deliberately left alone so
+     `mb-*`/`mt-*` utilities on the <hr> still work — a `margin: 0 auto` shorthand here
+     silently beat them (same specificity, and this file loads after Tailwind), which
+     collapsed the gap under every divider on the site. */
+  margin-inline: auto;
 }
 
 /* Scroll-triggered fade-in */

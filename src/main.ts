@@ -1,6 +1,7 @@
 import "./style.css";
 import { events } from "./events-data.ts";
 import { upcomingPreview, startOfToday, type EventPreview } from "./events-logic.ts";
+import { testimonials, type Testimonial } from "./testimonials-data.ts";
 
 // --- Mobile menu toggle ---
 const menuToggle = document.getElementById("menu-toggle");
@@ -40,6 +41,37 @@ function homeEventCard(p: EventPreview): string {
     ? `<p class="text-xs text-charcoal/50 uppercase tracking-wider">${ev.time}</p>`
     : `<p class="text-xs text-charcoal/50">${ev.place}</p>`;
   return `<article class="bg-warm-white text-charcoal rounded-xl p-5 flex flex-col sm:flex-row sm:items-center gap-4 shadow-sm">${img}<div class="flex-1">${topLine}<h3 class="font-display text-base text-navy font-semibold">${ev.name}</h3><p class="text-sm text-charcoal/60">${p.dateLabel}</p></div></article>`;
+}
+
+// --- Homepage testimonials ("Actual Things People Have Said", from testimonials-data.ts) ---
+// Real quotes from real customers. If the list is empty the whole section is removed,
+// so the band never renders as an empty shell.
+const kindWordsGrid = document.getElementById("kind-words-grid");
+if (kindWordsGrid) {
+  const picks = testimonials.slice(0, 3);
+  if (picks.length === 0) {
+    document.getElementById("kind-words")?.remove();
+  } else {
+    kindWordsGrid.innerHTML = picks.map(testimonialCard).join("");
+  }
+}
+
+function testimonialCard(t: Testimonial): string {
+  const place = t.place ? `, ${escapeHtml(t.place)}` : "";
+  return `<figure class="bg-cream rounded-xl p-6 shadow-sm flex flex-col h-full">
+      <span aria-hidden="true" class="font-display text-4xl text-amber leading-none mb-2">&ldquo;</span>
+      <blockquote class="text-sm text-charcoal leading-relaxed flex-1">${escapeHtml(t.quote)}</blockquote>
+      <figcaption class="text-xs text-charcoal/60 italic leading-relaxed mt-4">&mdash; ${escapeHtml(t.attribution)}${place}</figcaption>
+    </figure>`;
+}
+
+// Review text is free-form prose from strangers, so escape it before it goes in via innerHTML.
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 // --- Scroll fade-in observer ---
