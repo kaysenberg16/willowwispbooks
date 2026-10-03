@@ -21,6 +21,14 @@ export const events: WWEvent[] = [
     dates: ["2026-09-10"],
   },
   {
+    name: "Spooky Street Fair & Halloween Parade",
+    place: "Tacoma, WA",
+    address: "N. Proctor between 26th & 29th, and N. 27th between Proctor & Adams, Tacoma, WA",
+    time: "3:00 – 8:00 PM (parade at 7:00)",
+    image: "/images/tacoma-halloween-parade.jpg",
+    dates: ["2026-10-17"],
+  },
+  {
     name: "NW Metaphysical Market",
     place: "Tacoma, WA",
     image: "/images/NW Metaphysical MarketMe.jpg",
