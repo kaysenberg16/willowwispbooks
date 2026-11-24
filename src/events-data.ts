@@ -5,6 +5,19 @@ import type { WWEvent } from "./events-logic.ts";
 // For a past date with photos, use the object form (see the NW Metaphysical example).
 export const events: WWEvent[] = [
   {
+    name: "Holiday Market at J. Bookwalter Wines",
+    place: "Woodinville, WA",
+    address: "J. Bookwalter Wines, 14810 NE 145th St, Building B, Woodinville, WA 98072",
+    time: "5:00 – 8:00 PM",
+    dates: ["2026-12-11"],
+  },
+  {
+    name: "PNW Witches' Market Yule Celebration 2026",
+    place: "Lynnwood, WA",
+    time: "12:00 – 5:00 PM both days",
+    dates: ["2026-12-19", "2026-12-20"],
+  },
+  {
     name: "Maple Valley Farmers Market",
     place: "Maple Valley, WA",
     address: "25719 Maple Valley Black Diamond Rd SE, Maple Valley, WA 98038",
