@@ -90,7 +90,12 @@ const upEl = document.getElementById("events-upcoming");
 const pastEl = document.getElementById("events-past");
 const emptyEl = document.getElementById("events-empty");
 
-if (nextEl) nextEl.innerHTML = nextBanner();
+if (nextEl) {
+  const winterIntro = today.getFullYear() === 2026 && today <= new Date(2026, 11, 20)
+    ? '<p class="text-center text-sm md:text-base text-charcoal/70 leading-relaxed mb-8">One last bit of magic before the year turns. Come find Willow Wisp Books tucked among the winter festivities, bringing stories, curiosities, and enchanting little treasures for the longest nights of the year.</p>'
+    : "";
+  nextEl.innerHTML = winterIntro + nextBanner();
+}
 if (upEl) upEl.innerHTML = upcoming.map(upcomingCard).join("");
 if (pastEl) pastEl.innerHTML = past.map(pastEntry).join("");
 if (emptyEl && upcoming.length === 0) emptyEl.classList.remove("hidden");
